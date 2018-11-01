@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context="com.unique.app.adssan.Rating">
+
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_marginTop="200dp"
+        android:layout_width="240dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button55"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:text="Add Review"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="230dp" />
+</LinearLayout>

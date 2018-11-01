@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Unique</string>
+    <string name="lorem"> MBBS – Thoothukudi Govt Medical college,\n
+Distinctions in : Anatomy, Pharmacology, Obstetrics and Gynecology\n
+Indian Council of Medical Research(ICMR), Short Term Studentship (STS) award for his Research work in
+Microbiology, During II year MBBS\n
+Well known for his MBBS question bank (Leonatez) During his MBBS\n
+        \n
+MD (Paediatrics) – King George Medical University, Lucknow.\n
+Divisional level IAP Quiz winner\n
+Best Post Graduate Thesis Award by Indian Journal of Pediatrics.\n
+Gold Medalist in MD Paediatrics.\n
+Publications in National and international level journals\n
+Currently working as a consultant Paediatrician In Kauvery Hospital, Trichy\n
+Area of interest is Paediatric Emergency and Critical care.</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="err_msg_name">Enter your full name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+</resources>

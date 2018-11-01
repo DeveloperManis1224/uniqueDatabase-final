@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/cno"
+        android:title="Chapter wise"/>
+
+    <item
+        android:id="@+id/rno"
+        android:title="Repeated wise"/>
+
+    <item
+        android:id="@+id/read"
+        android:title="Read/Unread wise"/>
+
+</menu>

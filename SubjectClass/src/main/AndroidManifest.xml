@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.unique.app.adssan">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon_round"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.unique.app.adssan.ActivitySplash"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.unique.app.adssan.SmsReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.unique.app.adssan.ActivityMain"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.unique.app.adssan.ActivitySignUp"
+            android:label="SIGNUP"
+            android:noHistory="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.unique.app.adssan.ActivityOTP"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.unique.app.adssan.ActivitySubject"
+            android:label="SUBJECTS"
+            android:noHistory="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.unique.app.adssan.ActivityChapters"
+            android:label="CHAPTERS"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.unique.app.adssan.ActivityQuestions"
+            android:label="QUESTIONS"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.unique.app.adssan.ScoreActivity"
+            android:label="Your score"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.unique.app.adssan.ScoreView" />
+        <activity
+            android:name="com.unique.app.adssan.AboutAuthor"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.unique.app.adssan.ContactusActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.unique.app.adssan.Rating"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.unique.app.adssan.SelectPart"
+            android:label="Select Part"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.unique.app.adssan.SelectType"
+            android:label="Select"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.unique.app.adssan.ActivitySignUp2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+
+</manifest>
