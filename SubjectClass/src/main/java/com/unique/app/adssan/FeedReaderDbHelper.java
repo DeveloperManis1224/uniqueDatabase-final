@@ -320,7 +320,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME_SUBJECT + " where " + COLUMN_SUB_YEAR + " = " + "'" + year + "'", null);
         res.moveToFirst();
-//Log.v("asdasdsadasdsad","select * from " + TABLE_NAME_SUBJECT+" where "+COLUMN_SUB_YEAR+" = "+"'"+year+"'");
+         Log.v("asdasdsadasdsad","select * from " + TABLE_NAME_SUBJECT+" where "+COLUMN_SUB_YEAR+" = "+"'"+year+"'");
         while (res.isAfterLast() == false) {
             //array_list.add(res.getString(res.getColumnIndex(COLUMN_KEY)) +"@@"+res.getString(res.getColumnIndex(COLUMN_VALUE))+"@@"+res.getString(res.getColumnIndex(COLUMN_FLAG)));
 
