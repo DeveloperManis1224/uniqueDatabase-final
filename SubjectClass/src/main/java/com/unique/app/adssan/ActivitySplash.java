@@ -34,6 +34,9 @@ TextView textView;
         final ImageView splash = (ImageView) findViewById(R.id.imageView);
         textView = findViewById(R.id.textt);
 
+        FeedReaderDbHelper frdh = new FeedReaderDbHelper(ActivitySplash.this);
+        frdh.DEleteAll();
+
         String styledText = "MBBS <font color='red'>Uni</font>versity <font color='red'>Que</font>stions Collections";
         textView.setText(Html.fromHtml(styledText), TextView.BufferType.SPANNABLE);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);

@@ -82,9 +82,18 @@ public class ActivityQuestions extends AppCompatActivity implements NegativeRevi
         pathLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 final AlertDialog.Builder alert = new AlertDialog.Builder(ActivityQuestions.this);
                 alert.setTitle("Current Page");
-                alert.setMessage(""+subject +" - "+ part +" - "+ chapter+" - "+type);
+
+                if(part.equalsIgnoreCase("Nothing"))
+                {
+                    alert.setMessage(""+subject  +" - "+ chapter+" - "+type);
+                }
+                else {
+                    alert.setMessage("" + subject + " - " + part + " - " + chapter + " - " + type);
+                }
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                        dialog.dismiss();

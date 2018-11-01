@@ -27,6 +27,8 @@ public class SelectPart extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
 
+        subject = getIntent().getStringExtra("subject");
+
         mRecyclerView = (android.support.v7.widget.RecyclerView) findViewById(R.id.my_recycler_view1);
         mRecyclerView.setHasFixedSize(true);
         android.content.SharedPreferences settings = getSharedPreferences("MyPref", MODE_PRIVATE);
@@ -40,7 +42,6 @@ public class SelectPart extends AppCompatActivity {
         subject = getIntent().getStringExtra("subject");
         FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(SelectPart.this);
         ArrayList<PartModel> arrayList = feedReaderDbHelper.getPartNames(subject);
-       // mAdapter.notifyDataSetChanged();
         return arrayList;
     }
 }

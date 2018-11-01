@@ -14,7 +14,7 @@
         android:id="@+id/ratingBar"
         android:layout_marginTop="200dp"
         android:layout_width="240dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="100dp"
         android:layout_height="wrap_content" />
 
     <Button
@@ -23,6 +23,7 @@
         android:layout_height="60dp"
         android:layout_centerVertical="true"
         android:text="Add Review"
+        android:layout_marginBottom="100dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="230dp" />
 </LinearLayout>

@@ -121,15 +121,15 @@ public class ActivitySignUp extends Activity {
 
                 }
                 if (spinner.getSelectedItem().toString() == "YEAR 1") {
-                    year = "1 YEAR";
+                    year = "1year";
                 } else if (spinner.getSelectedItem().toString() == "YEAR 2") {
-                    year = "2 YEAR";
+                    year = "2year";
                 }
                 if (spinner.getSelectedItem().toString() == "YEAR 3") {
-                    year = "3 YEAR";
+                    year = "3year";
                 }
                 if (spinner.getSelectedItem().toString() == "YEAR 4") {
-                    year = "4 YEAR";
+                    year = "4year";
                 }
                 if (spinner.getSelectedItem().toString() == "YEAR 5") {
                     year = "5 YEAR";

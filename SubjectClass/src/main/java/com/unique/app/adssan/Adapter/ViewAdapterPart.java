@@ -70,7 +70,7 @@ import com.unique.app.adssan.SelectPart;
 
 public class ViewAdapterPart extends RecyclerView
         .Adapter<ViewAdapterPart.DataObjectHolder> {
-    private static String LOG_TAG = "ViewAdapterSubject";
+    private static String LOG_TAG = "ViewAdapterPart";
     private ArrayList<PartModel> mDataset;
     private static ViewAdapterChapter.MyClickListener myClickListener;
 
@@ -126,13 +126,36 @@ public class ViewAdapterPart extends RecyclerView
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_view_row, parent, false);
 
+
         DataObjectHolder dataObjectHolder = new ViewAdapterPart.DataObjectHolder(view);
         return dataObjectHolder;
     }
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.label.setText(mDataset.get(position).getPartName());
+
+
+        if(mDataset.get(position).getPartName().equalsIgnoreCase("Nothing"))
+        {
+            holder.label.setText(mDataset.get(position).getPartName());
+            SharedPreferences pref = holder.context.getApplicationContext().getSharedPreferences("MyPref", holder.context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("subject", SelectPart.subject); // Saving string
+            editor.putString("part",  holder.label.getText().toString()); // Saving string
+            editor.apply(); // commit changes
+            Intent in = new Intent(holder.context,ActivityChapters.class);
+            in.putExtra("subject", SelectPart.subject);
+            in.putExtra("part", holder.label.getText().toString());
+            holder.context.startActivity(in);
+            Log.i(LOG_TAG, "Adding Nothing");
+        }
+        else {
+            holder.label.setText(mDataset.get(position).getPartName());
+            Log.i(LOG_TAG, "Adding Listener");
+        }
+
+
+
 
     }
 
