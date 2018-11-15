@@ -77,6 +77,16 @@ public class ActivityChapters extends AppCompatActivity {
                                 startActivity(sendIntent);
 
                                 break;
+
+                            case R.id.edit_board:
+                                Intent inEdit = new Intent(ActivityChapters.this, EditorialBoard.class);
+                                startActivity(inEdit);
+                                break;
+                            case R.id.about_app:
+
+                                Intent intent134 = new Intent(getApplicationContext(),AboutApp.class);
+                                startActivity(intent134);
+                                break;
                             case R.id.about:
 
                                 Intent intent1 = new Intent(getApplicationContext(),AboutAuthor.class);

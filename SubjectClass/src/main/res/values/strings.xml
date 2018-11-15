@@ -14,6 +14,52 @@ Publications in National and international level journals\n
 Currently working as a consultant Paediatrician In Kauvery Hospital, Trichy\n
 Area of interest is Paediatric Emergency and Critical care.</string>
 
+    <string name="about_author">
+        \t\t\t Dr.P.Meganathan founder of this app, has a distinguished academic career. He started his
+Medical career in Thoothukudi Govt Medical college, Tamil Nadu. He excelled in his career
+right from his initial days. He scored distinction in Anatomy, Pharmacology and Obstetrics &amp;
+Gynecology. He got the Short Term Studentship award from ICMR(Indian Council Medical
+Research) for his excellent research work in Microbiology during his second year under
+graduation.  He pursued his post graduation (MD Paediatrics) in prestigious KGMU (King
+Geroge’s Medical University), Lucknow. He excelled during his post graduation and acquired
+“Gold Medal” for his outstanding performance. He has got the “Best Post Graduate Thesis
+Award” from Indian Journal of Pediatrics. He has publications in national and international
+journals. Currently he is working as Consultant Paediatrician in Kauvery hospital, Trichy. His
+prime interest is on Paediatric critical care and eMedicine. He was well known by various
+medical students for his exemplary compilation of university questions, which was useful for
+many. Encouragement of many undergraduates made him to start this application.
+    </string>
+
+    <string name="about_app">
+        \t\t\t UniQue app is developed in especial favour of medical students to aid them in their
+university theory exam preparation. This is the first app of this kind for assisting students
+who undergo an extremely tense situation during exam preparation. It is invariably a tradition
+of every medical college student to cumulate the previous years’ questions for a better and an
+organised study schedule.\n\n
+How do these questions help? Medical science is vast, extensive and boundless. Every
+student should have a detailed reading of the suggested book for a genuine understanding of
+the specific subject. However, when the qualifying exams are nearing, these questions help
+them to carefully revise the most crucial topics often repeated.\n\n
+In this app, one can undoubtedly find last 29 years collection of university questions from
+1990 to 2018. All subject questions are properly sorted into chapter-wise and also one can
+know how many times each question was repeated. The users enjoy the freedom to sort and
+filter the questions as per their need.\n\n
+There is, in addition, a specially planned performance desk for the students to assess their
+progress individually by graphical representation.\n\n
+This specific app is now launched for Tamilnadu Dr.M.G.R.Medical University MBBS
+Questions (First Year, Second Year, Prefinal Year &amp; Final Year). We are meticulously
+working to revise the app in the upcoming months with questions from Kerala University of
+Health Sciences, NTR University of Health Sciences (Andhra Pradesh), Rajiv Gandhi
+University of Health Sciences (Karnataka) and other Universities. There will be furthermore
+an update of subjectwise images of spotters and OSCE to aid the students for University
+practical examination.\n\n
+The app will be improvised in future also in the interest of postgraduate students and students
+preparing for DNB.\n\n
+Please share this app with your friends and fellow colleagues so that everyone can attain its
+maximum benefit. Kindly encourage us in ameliorating our work by giving your valuable
+feedback and appropriate suggestions.
+    </string>
+
     <string name="action_settings">Settings</string>
     <string name="hint_name">Full Name</string>
     <string name="hint_email">Email</string>
@@ -22,4 +68,31 @@ Area of interest is Paediatric Emergency and Critical care.</string>
     <string name="err_msg_name">Enter your full name</string>
     <string name="err_msg_email">Enter valid email address</string>
     <string name="err_msg_password">Enter the password</string>
-</resources>
+
+
+    <!--1. Dr. P.Meganathan., MBBS., MD (Paed). Editor in Chief-->
+    <!--2. Dr. L.Ramya Meganathan MBBS. Co-Editor-->
+    <!--Subjects Contributors-->
+    <!--3. Dr. S.Anton Remith Riche MBBS., DCH., DNB.,-->
+    <!--4. Dr. S.Aravind MBBS., MD (GM)-->
+    <!--5. Dr. P.T.Lakshmipriya, MBBS.,-->
+    <!--6. Dr. S.Meenoo MBBS., MS(OG)., DNB (OG).,-->
+    <!--7. Dr. M.H.Mohamed Muzzammil., MBBS., MD (Paed)-->
+    <!--8. Dr. J.Princy Felicia., MBBS., MD (SPM)-->
+    <!--9. Dr. A.Ramanathan.,MBBS.,-->
+    <!--10. Dr. P.Sivakaran,MBBS.,MS(ORTHO)-->
+    <!--11. Dr. J.Vasanth Kumar., MBBS.,-->
+    <!--12. Dr. S.P.Vinoth Kumar., MBBS., MD (Paed)-->
+    <string name="dr1">Dr. P.Meganathan., MBBS., MD (Paed). Editor in Chief</string>
+    <string name="dr2">Dr. L.Ramya Meganathan MBBS. Co-Editor Subjects Contributors</string>
+        <string name="dr3">Dr. S.Anton Remith Riche MBBS., DCH., DNB.,</string>
+        <string name="dr4">Dr. S.Aravind MBBS., MD (GM)</string>
+        <string name="dr5">Dr. P.T.Lakshmipriya, MBBS.,</string>
+        <string name="dr6">Dr. S.Meenoo MBBS., MS(OG)., DNB (OG).,</string>
+        <string name="dr7">Dr. M.H.Mohamed Muzzammil., MBBS., MD (Paed)</string>
+        <string name="dr8">Dr. J.Princy Felicia., MBBS., MD (SPM)</string>
+        <string name="dr9">Dr. A.Ramanathan.,MBBS.,</string>
+        <string name="dr10">Dr. P.Sivakaran,MBBS.,MS(ORTHO)</string>
+        <string name="dr11">Dr. J.Vasanth Kumar., MBBS.,</string>
+        <string name="dr12">Dr. S.P.Vinoth Kumar., MBBS., MD (Paed)</string>
+    </resources>

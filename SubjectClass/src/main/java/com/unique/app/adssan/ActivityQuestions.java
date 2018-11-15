@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -83,7 +84,6 @@ public class ActivityQuestions extends AppCompatActivity implements NegativeRevi
             @Override
             public void onClick(View view) {
 
-
                 final AlertDialog.Builder alert = new AlertDialog.Builder(ActivityQuestions.this);
                 alert.setTitle("Current Page");
 
@@ -122,6 +122,14 @@ public class ActivityQuestions extends AppCompatActivity implements NegativeRevi
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        DefaultItemAnimator animator = new DefaultItemAnimator() {
+            @Override
+            public boolean canReuseUpdatedViewHolder(RecyclerView.ViewHolder viewHolder) {
+                return true;
+            }
+        };
+        mRecyclerView.setItemAnimator(animator);
 
         mAdapter = new ViewAdapterQuestions(feedReaderDbHelper.getQuestions(subject, part, chapter, year,type));
         mRecyclerView.setAdapter(mAdapter);
@@ -250,6 +258,11 @@ public class ActivityQuestions extends AppCompatActivity implements NegativeRevi
                                 Intent intent11 = new Intent(getApplicationContext(),ScoreView.class);
                                 startActivity(intent11);
                                 break;
+
+                            case R.id.edit_board:
+                                Intent inEdit = new Intent(ActivityQuestions.this, EditorialBoard.class);
+                                startActivity(inEdit);
+                                break;
                             case R.id.share:
 
                                 Intent sendIntent = new Intent();
@@ -258,6 +271,12 @@ public class ActivityQuestions extends AppCompatActivity implements NegativeRevi
                                 sendIntent.setType("text/plain");
                                 startActivity(sendIntent);
 
+                                break;
+
+                            case R.id.about_app:
+
+                                Intent intent134 = new Intent(getApplicationContext(),AboutApp.class);
+                                startActivity(intent134);
                                 break;
                             case R.id.about:
 

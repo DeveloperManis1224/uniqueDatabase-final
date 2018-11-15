@@ -76,8 +76,27 @@ public class ViewAdapterQuestions extends RecyclerView
     @Override
     public DataObjectHolder onCreateViewHolder(ViewGroup parent,
                                                int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+        final View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_view_row_questions, parent, false);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final int clickPosition;
+                try {
+                    final FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(view.getContext());
+                    clickPosition = ActivityQuestions.mRecyclerView.getChildAdapterPosition(view);
+                    Log.e("asasasasas1111",""+mDataset.get(clickPosition).get_id());
+                    feedReaderDbHelper.setColor(mDataset.get(clickPosition).get_id());
+                    ActivityQuestions.mAdapter.notifyItemChanged(clickPosition);
+                }catch(Exception e)
+                {
+                    Log.e("asasasasas1111",""+e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
         return dataObjectHolder;
@@ -96,20 +115,20 @@ public class ViewAdapterQuestions extends RecyclerView
 //        }
 //       // holder.imgTick.setBackgroundResource(R.drawable.blue_tick);
 
-        holder.lyt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Log.e("asasasasas1111",""+mDataset.get(position).get_id());
-                feedReaderDbHelper.setColor(mDataset.get(position).get_id());
-
-//                Intent in = new Intent(holder.context,ActivityQuestions.class);
-//                holder.context.startActivity(in);
-              //  ActivityQuestions.mRecyclerView.setAdapter(ActivityQuestions.mAdapter);
-               // ActivityQuestions.mAdapter.notifyDataSetChanged();
-                ActivityQuestions.mAdapter.notifyItemChanged(position);
-            }
-        });
+//        holder.lyt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Log.e("asasasasas1111",""+mDataset.get(position).get_id());
+//                feedReaderDbHelper.setColor(mDataset.get(position).get_id());
+//
+////                Intent in = new Intent(holder.context,ActivityQuestions.class);
+////                holder.context.startActivity(in);
+//              //  ActivityQuestions.mRecyclerView.setAdapter(ActivityQuestions.mAdapter);
+//               // ActivityQuestions.mAdapter.notifyDataSetChanged();
+//                ActivityQuestions.mAdapter.notifyItemChanged(position);
+//            }
+//        });
 
         try {
             Log.e("asasasasasas34534",""+feedReaderDbHelper.getColor(mDataset.get(position).get_id()));

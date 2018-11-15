@@ -3,6 +3,8 @@ package com.unique.app.adssan;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,8 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -34,6 +38,10 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
     private RecyclerView.LayoutManager mLayoutManager;
     private static String LOG_TAG = "CardViewActivity";
     private DrawerLayout mDrawerLayout;
+    Thread td;
+
+    PieChart pieChart;
+    Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,6 +51,9 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
         if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
+
+        pieChart = (PieChart) findViewById(R.id.piechart);
+        pieChart.setVisibility(View.GONE);
         FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(this);
         SharedPreferences settings = getSharedPreferences("MyPref", MODE_PRIVATE);
         String year11 = settings.getString("year", "");
@@ -50,28 +61,50 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
         int value= feedReaderDbHelper.getRead(year11);
         int value1  = feedReaderDbHelper.getUnRead(year11);
 
+        setChart();
+
+//        handler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                setChart();
+//                ((TextView)findViewById(R.id.progress_txt)).setVisibility(View.GONE);
+//                ((ProgressBar)findViewById(R.id.progress)).setVisibility(View.GONE);
+//            }
+//        };
+
+//        td= new Thread(new Runnable() {
+//            public void run(){
+//               if(ActivitySplash.dataRecieved)
+//               {
+//                   handler.sendEmptyMessage(0);
+//               }
+//
+//            }
+//        });
+//        td.start();
+
         Log.e("asasasasasasasasasasa",""+value+"   -   " +value1);
 
-        PieChart pieChart = (PieChart) findViewById(R.id.piechart);
-        pieChart.setVisibility(View.VISIBLE);
-        pieChart.setDescription("");
-        ArrayList<Entry> yvalues = new ArrayList<Entry>();
-        yvalues.add(new Entry(value, 0));
-        yvalues.add(new Entry(value1, 1));
-
-
-        PieDataSet dataSet = new PieDataSet(yvalues, " ");
-        ArrayList<String> xVals = new ArrayList<String>();
-
-        xVals.add("Read");
-        xVals.add("Un Read");
-
-
-        PieData data = new PieData(xVals, dataSet);
-
-        data.setValueFormatter(new PercentFormatter());
-        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
-        pieChart.setData(data);
+//        PieChart pieChart = (PieChart) findViewById(R.id.piechart);
+//        pieChart.setVisibility(View.VISIBLE);
+//        pieChart.setDescription("");
+//        ArrayList<Entry> yvalues = new ArrayList<Entry>();
+//        yvalues.add(new Entry(value, 0));
+//        yvalues.add(new Entry(value1, 1));
+//
+//
+//        PieDataSet dataSet = new PieDataSet(yvalues, " ");
+//        ArrayList<String> xVals = new ArrayList<String>();
+//
+//        xVals.add("Read");
+//        xVals.add("Un Read");
+//
+//
+//        PieData data = new PieData(xVals, dataSet);
+//
+//        data.setValueFormatter(new PercentFormatter());
+//        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
+//        pieChart.setData(data);
        // Toast.makeText(getApplicationContext(), "subject", Toast.LENGTH_LONG).show();
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -101,6 +134,10 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
                                 Intent intent = new Intent(ActivitySubject.this, ContactusActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.edit_board:
+                                Intent inEdit = new Intent(ActivitySubject.this, EditorialBoard.class);
+                                startActivity(inEdit);
+                                break;
 
                             case R.id.score:
                                 Intent intent11 = new Intent(getApplicationContext(),ScoreView.class);
@@ -113,7 +150,11 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
                                 sendIntent.putExtra(Intent.EXTRA_TEXT, "App link: http://play.google.com/store/apps/details?id=com.unique.app.adssan");
                                 sendIntent.setType("text/plain");
                                 startActivity(sendIntent);
+                                break;
+                            case R.id.about_app:
 
+                                Intent intent134 = new Intent(getApplicationContext(),AboutApp.class);
+                                startActivity(intent134);
                                 break;
                             case R.id.about:
 
@@ -122,11 +163,7 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
                                 break;
                             case R.id.update:
                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.unique.app.adssan")));
-
                                 break;
-
-
-
                         }
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
@@ -141,6 +178,40 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
                 });
 
 
+    }
+
+
+    private void setChart()
+    {
+        FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(this);
+        SharedPreferences settings = getSharedPreferences("MyPref", MODE_PRIVATE);
+        String year11 = settings.getString("year", "");
+
+        int value= feedReaderDbHelper.getRead(year11);
+        int value1  = feedReaderDbHelper.getUnRead(year11);
+
+        Log.e("asasasasasasasasasasa",""+value+"   -   " +value1);
+
+        PieChart pieChart = (PieChart) findViewById(R.id.piechart);
+        pieChart.setVisibility(View.VISIBLE);
+        pieChart.setDescription("");
+        ArrayList<Entry> yvalues = new ArrayList<Entry>();
+        yvalues.add(new Entry(value, 0));
+        yvalues.add(new Entry(value1, 1));
+
+
+        PieDataSet dataSet = new PieDataSet(yvalues, " ");
+        ArrayList<String> xVals = new ArrayList<String>();
+
+        xVals.add("Read");
+        xVals.add("Un Read");
+
+
+        PieData data = new PieData(xVals, dataSet);
+
+        data.setValueFormatter(new PercentFormatter());
+        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
+        pieChart.setData(data);
     }
 
     public ArrayList<CardSubjectData> getDataSet(String year) {

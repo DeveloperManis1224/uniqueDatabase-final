@@ -14,34 +14,25 @@ import com.unique.app.adssan.Adapter.TypeModel;
 import java.util.ArrayList;
 
 
-/**
- * Created by thiyagu on 3/20/2018.
- */
-
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-
     private static final String DATABASE_NAME = "data.db";
     private static final String TABLE_NAME_SUBJECT = "subject";
     private static final String TABLE_NAME_CHAPTER = "chapter";
     private static final String TABLE_NAME_QUESTIONS = "questions";
     private static final String TABLE_NAME_QUESTIONS1 = "questions1";
 
-
     private static final String ID = "id";
     private static final String COLUMN_ID = "idvalue";
-
 
     private static final String COLUMN_SUB_CID = "cid";
     private static final String COLUMN_SUB_CATEGORY_NAME = "categoryname";
     private static final String COLUMN_SUB_YEAR = "year";
 
-
     private static final String COLUMN_CHAPTER_NAME = "chaptername";
     private static final String COLUMN_CHAPTER_SUBJECT = "subject";
     private static final String COLUMN_CHAPTER_YEAR = "year";
-
 
     private static final String COLUMNT_QUESTIONS_ID = "tid";
     private static final String COLUMNT_QUESTIONS_YEAR = "years";
@@ -49,7 +40,6 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     private static final String COLUMN_QUESTIONS_CHAPTERNAME = "chaptername";
     private static final String COLUMN_QUESTIONS_CHAPTERPART = "part";
     private static final String COLUMN_QUESTIONS_QUE = "que";
-
 
     private static final String COLUMNT_QUESTIONS1_ID1 = "id5";
     private static final String COLUMNT_QUESTIONS1_TID = "tid5";
@@ -64,12 +54,22 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     private static final String COLUMNT_QUESTIONS1_STATUS = "status";
 
 
+    private static final String COLUMN_STS_ID = "_id";
+    private static final String COLUMN_QUESTIONS="question";
+    private static final String COLUMN_STATUS ="status";
+    private static final String TABLE_READ_UNREAD ="read_unread";
+
     private static final String SQL_CREATE_TABLE_SUBJECT = "CREATE TABLE " + FeedReaderDbHelper.TABLE_NAME_SUBJECT + " (" +
             FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY," +
             FeedReaderDbHelper.COLUMN_SUB_CID + " TEXT," +
             FeedReaderDbHelper.COLUMN_SUB_CATEGORY_NAME + " TEXT," +
             FeedReaderDbHelper.COLUMN_SUB_YEAR + " TEXT)";
 
+
+    private static final String SQL_CREATE_READ_UNREAD = "CREATE TABLE " + FeedReaderDbHelper.TABLE_READ_UNREAD + " (" +
+            FeedReaderDbHelper.COLUMN_STS_ID + " INTEGER PRIMARY KEY," +
+            FeedReaderDbHelper.COLUMN_QUESTIONS + " TEXT," +
+            FeedReaderDbHelper.COLUMN_STATUS + " TEXT)";
 
     private static final String SQL_CREATE_TABLE_CHAPTER = "CREATE TABLE " + FeedReaderDbHelper.TABLE_NAME_CHAPTER + " (" +
             FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY," +
@@ -115,6 +115,8 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_QUESTIONS);
         db.execSQL(SQL_CREATE_TABLE_QUESTIONS1);
 
+        db.execSQL(SQL_CREATE_READ_UNREAD);
+
     }
 
     @Override
@@ -123,6 +125,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_QUESTIONS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_QUESTIONS1);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CHAPTER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_READ_UNREAD);
         onCreate(db);
 
 
@@ -136,8 +139,6 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_SUB_CID, chapter.getCid());
         values.put(COLUMN_SUB_CATEGORY_NAME, chapter.getCategory_name());
         values.put(COLUMN_SUB_YEAR, chapter.getYear());
-
-
         db.insert(TABLE_NAME_SUBJECT, null, values);
         // PrintAllParam();
         db.close();
@@ -272,7 +273,6 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
     }
 
-
     public void addQuestions1(DataQuestions1 dataQuestions1) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -289,9 +289,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_QUESTIONS1_QUE, dataQuestions1.getQue());
         values.put(COLUMN_QUESTIONS1_CNO, dataQuestions1.getCno());
         values.put(COLUMN_QUESTIONS1_RNO, dataQuestions1.getRno());
-
-
-
+        values.put(COLUMNT_QUESTIONS1_STATUS,"0");
         db.insert(TABLE_NAME_QUESTIONS1, null, values);
         //  PrintAllParam();
         db.close();
@@ -434,6 +432,37 @@ public ArrayList<PartModel> getPartNames(String subject) {
         while (res.isAfterLast() == false) {
 
             String s = res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_PART));
+
+
+            array_list.add(s);
+
+
+            res.moveToNext();
+
+        }
+        db.close();
+
+
+        return array_list;
+
+
+    }
+
+
+    public ArrayList<String> getReadUnreadQuestions(String subject) {
+        ArrayList<String> array_list = new ArrayList<String>();
+        QuestionsDAta questionsDAta = null;
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_READ_UNREAD , null);
+
+        Log.v("sadsadsadsad", "select * from " + TABLE_READ_UNREAD);
+
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+
+            String s = res.getString(res.getColumnIndex(COLUMN_QUESTIONS));
 
 
             array_list.add(s);
@@ -614,91 +643,49 @@ public ArrayList<PartModel> getPartNames(String subject) {
 
     public void setColor(String ques) {
 
-        //UPDATE DB_TABLE SET YOUR_COLUMN='newValue' WHERE id=6
-        ArrayList<CardQuestionsData> array_list = new ArrayList<CardQuestionsData>();
-        CardQuestionsData card_subjectData = null;
-        //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Log.v("forgetchapter", "update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " + " where " + ID + " =" + "'" + ques);
-        Cursor res = db.rawQuery("update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " + " where " + ID + " = " + "'" + ques + "'", null);
+        Log.v("forgetchapter1244", "update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " + " where " + ID + " = " + "'" + ques+"';" );
+        Cursor res = db.rawQuery("update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " +" where " + ID + " = " + "'" + ques + "';", null);
         // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
         res.moveToFirst();
-
-//        while (res.isAfterLast() == false) {
-//            //array_list.add(res.getString(res.getColumnIndex(COLUMN_KEY)) +"@@"+res.getString(res.getColumnIndex(COLUMN_VALUE))+"@@"+res.getString(res.getColumnIndex(COLUMN_FLAG)));
-//
-//            // array_list.add(res.getString(res.getColumnIndex(ID)) + "@@" + res.getString(res.getColumnIndex(COLUMN_SUB_CID)) + "@@" + res.getString(res.getColumnIndex(COLUMN_SUB_CATEGORY_NAME))+ "@@" + res.getString(res.getColumnIndex(COLUMN_SUB_YEAR)));
-//
-//
-//            // array_list.add(res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUES)));
-//            card_subjectData = new CardQuestionsData(res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUES)), res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_CNO)),res.getString(res.getColumnIndex(ID)),res.getString(res.getColumnIndex(COLUMNT_QUESTIONS1_STATUS)));
-//            array_list.add(card_subjectData);
-//
-//            // Log.v("thisisforquestions", res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUES)));
-//
-//            res.moveToNext();
-//
-//        }
         db.close();
-
-
     }
 
     public String getColor(String ques) {
-
-
-        //UPDATE DB_TABLE SET YOUR_COLUMN='newValue' WHERE id=6 "
-
-        ArrayList<CardQuestionsData> array_list = new ArrayList<CardQuestionsData>();
-        CardQuestionsData card_subjectData = null;
-        //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Log.v("forgetchapter", "update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " + " where " + COLUMN_QUESTIONS1_QUES + " =" + "'" + ques);
-        Cursor res = db.rawQuery("select " + COLUMNT_QUESTIONS1_STATUS + " from " + TABLE_NAME_QUESTIONS1 + " where " + ID + " = " + "' " + ques + "'", null);
-        // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
+        Log.v("forgetchapter555", "select " + COLUMNT_QUESTIONS1_STATUS + " from " + TABLE_NAME_QUESTIONS1 + " where " + ID + " = " + "' " + ques + "'");
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + ID + " = " + "'" + ques + "'", null);
         res.moveToFirst();
         String value = null;
-        while (res.isAfterLast() == false) {
+        while (!res.isAfterLast()) {
             value = res.getString(res.getColumnIndex(COLUMNT_QUESTIONS1_STATUS));
-            // Log.v("thisisforquestions", res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUES)));
             res.moveToNext();
         }
         db.close();
 
         return value;
-
-
     }
-
-
     public int getRead(String year) {
-        ArrayList<CardQuestionsData> array_list = new ArrayList<CardQuestionsData>();
-        CardQuestionsData card_subjectData = null;
-        //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMNT_QUESTIONS1_STATUS + " = " + "'" + 1 + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'", null);
-        // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
         res.moveToFirst();
         int value = 0;
         while (res.isAfterLast() == false) {
             value++;
             // value = Integer.parseInt(res.getString(Integer.parseInt(res.getString(0))));
-            Log.v("thisisforquestions", String.valueOf(value));
+            Log.v("count_read_unread", String.valueOf(value));
 
             res.moveToNext();
 
         }
         db.close();
+        Log.v("count_read_unread", String.valueOf(value));
+
         return value;
     }
 
     public int getReadall(String subject) {
-
-
-        ArrayList<CardQuestionsData> array_list = new ArrayList<CardQuestionsData>();
-        CardQuestionsData card_subjectData = null;
-        //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMNT_QUESTIONS1_STATUS + " = " + "'" + 1 + "'"+" and "+COLUMN_QUESTIONS1_SUBJECT+" = "+"'"+subject+"'", null);
@@ -715,6 +702,9 @@ public ArrayList<PartModel> getPartNames(String subject) {
         }
         db.close();
 
+        Log.v("count_read_unread", String.valueOf(value));
+
+
         return value;
 
 
@@ -729,7 +719,7 @@ public ArrayList<PartModel> getPartNames(String subject) {
 //select * from questions1 where status IS NULL OR status =' ';
         //Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMNT_QUESTIONS1_STATUS + " IS NULL OR " + COLUMNT_QUESTIONS1_STATUS + " = " + "'" + " " + "'"+" and "+COLUMN_QUESTIONS1_SUBJECT+" = "+"'"+subject+"'", null);
 
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT+" = "+"'"+subject+"'"+" and "+COLUMNT_QUESTIONS1_STATUS + " IS NULL OR " + COLUMNT_QUESTIONS1_STATUS+ " = " + "'" + " " + "'", null);
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT+" = "+"'"+subject+"'"+" and "+COLUMNT_QUESTIONS1_STATUS + " = " + "'" + 0 + "'", null);
 
 
         Log.v("dsfdsfdsfsdffdf","select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT+" = "+"'"+subject+"'"+" and "+COLUMNT_QUESTIONS1_STATUS + " IS NULL OR " + COLUMNT_QUESTIONS1_STATUS+ " = " + "'" + " " + "'");
@@ -750,21 +740,15 @@ public ArrayList<PartModel> getPartNames(String subject) {
 
     }
     public int getUnRead(String year) {
-
-
-        ArrayList<CardQuestionsData> array_list = new ArrayList<CardQuestionsData>();
-        CardQuestionsData card_subjectData = null;
-        //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-//select * from questions1 where status IS NULL OR status =' ';
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMNT_QUESTIONS1_STATUS + " IS NULL OR " + COLUMNT_QUESTIONS1_STATUS + " = " + "'" + " " + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'", null);
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMNT_QUESTIONS1_STATUS + " = " + "'" + 0 + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'", null);
         // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
         res.moveToFirst();
         int value = 0;
         while (res.isAfterLast() == false) {
             value++;
             // value = Integer.parseInt(res.getString(Integer.parseInt(res.getString(0))));
-            Log.v("thisisforquestions", String.valueOf(value));
+            Log.v("count_read_unread", String.valueOf(value));
 
             res.moveToNext();
 

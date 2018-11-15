@@ -8,6 +8,7 @@
     android:weightSum="10"
     tools:context="com.unique.app.adssan.ActivitySubject">
 
+
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart"
         android:visibility="gone"
