@@ -328,21 +328,14 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
             // array_list.add(res.getString(res.getColumnIndex(COLUMN_SUB_CATEGORY_NAME)));
             card_subjectData = new CardSubjectData(res.getString(res.getColumnIndex(COLUMN_SUB_CATEGORY_NAME)));
             array_list.add(card_subjectData);
-
-
             res.moveToNext();
-
         }
         db.close();
-
         return array_list;
-
-
     }
 
     public ArrayList<String> getSubjectAlone(String year) {
         ArrayList<String> array_list = new ArrayList<String>();
-
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + TABLE_NAME_SUBJECT + " where " + COLUMN_SUB_YEAR + " = " + "'" + year + "'", null);
