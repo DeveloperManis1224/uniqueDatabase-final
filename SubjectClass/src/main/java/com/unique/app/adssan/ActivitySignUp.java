@@ -132,7 +132,7 @@ public class ActivitySignUp extends Activity {
                     year = "4year";
                 }
                 if (spinner.getSelectedItem().toString() == "YEAR 5") {
-                    year = "5 YEAR";
+                    year = "5year";
                 }
 
                 SharedPreferences pref = getApplicationContext().getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);

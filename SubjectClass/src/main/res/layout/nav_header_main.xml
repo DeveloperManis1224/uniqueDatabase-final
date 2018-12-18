@@ -9,16 +9,16 @@
     android:foreground="?attr/selectableItemBackgroundBorderless"
     android:gravity="bottom"
     android:orientation="vertical"
-android:padding="10dp"
+    android:padding="10dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
     <ImageView
         android:padding="0dp"
         android:background="#ffffff"
         android:id="@+id/nav_header_imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/logoo" />
+        android:src="@mipmap/logo_updated2"
+        />
 
     <TextView
         android:id="@+id/nav_header_textView"

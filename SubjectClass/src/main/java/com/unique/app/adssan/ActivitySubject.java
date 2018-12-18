@@ -42,6 +42,15 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
 
     PieChart pieChart;
     Handler handler;
+
+
+    private float getPercentage(int total,int readValue )
+    {
+        float val = 0 ;
+        val = (float) (readValue*100) /total;
+        Log.e("readValu",String.valueOf(val));
+        return val;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -58,8 +67,12 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
         SharedPreferences settings = getSharedPreferences("MyPref", MODE_PRIVATE);
         String year11 = settings.getString("year", "");
 
+
         int value= feedReaderDbHelper.getRead(year11);
         int value1  = feedReaderDbHelper.getUnRead(year11);
+
+        Log.v("readValue",""+getPercentage(value+value1,value1));
+        getPercentage(value+value1,value1);
 
         setChart();
 
@@ -144,7 +157,6 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
                                 startActivity(intent11);
                                 break;
                             case R.id.share:
-
                                 Intent sendIntent = new Intent();
                                 sendIntent.setAction(Intent.ACTION_SEND);
                                 sendIntent.putExtra(Intent.EXTRA_TEXT, "App link: http://play.google.com/store/apps/details?id=com.unique.app.adssan");
@@ -186,12 +198,9 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
         FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(this);
         SharedPreferences settings = getSharedPreferences("MyPref", MODE_PRIVATE);
         String year11 = settings.getString("year", "");
-
         int value= feedReaderDbHelper.getRead(year11);
         int value1  = feedReaderDbHelper.getUnRead(year11);
-
         Log.e("asasasasasasasasasasa",""+value+"   -   " +value1);
-
         PieChart pieChart = (PieChart) findViewById(R.id.piechart);
         pieChart.setVisibility(View.VISIBLE);
         pieChart.setDescription("");
@@ -199,16 +208,12 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
         yvalues.add(new Entry(value, 0));
         yvalues.add(new Entry(value1, 1));
 
-
         PieDataSet dataSet = new PieDataSet(yvalues, " ");
         ArrayList<String> xVals = new ArrayList<String>();
 
         xVals.add("Read");
         xVals.add("Un Read");
-
-
         PieData data = new PieData(xVals, dataSet);
-
         data.setValueFormatter(new PercentFormatter());
         dataSet.setColors(ColorTemplate.PASTEL_COLORS);
         pieChart.setData(data);

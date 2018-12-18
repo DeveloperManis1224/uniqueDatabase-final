@@ -137,6 +137,7 @@ progressDialog.show();
                             @Override
                             public void run() {
                         Toast.makeText(getApplicationContext(),"OTP wrong",Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                             }
                         });
                     }

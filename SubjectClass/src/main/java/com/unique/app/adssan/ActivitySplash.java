@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +20,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -51,7 +53,6 @@ public class ActivitySplash extends AppCompatActivity {
         {
             noInternetAlert();
         }
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching...");
         progressDialog.setCancelable(false);
@@ -169,8 +170,6 @@ public class ActivitySplash extends AppCompatActivity {
 
     private void getAllData() {
         // Instantiate the RequestQueue.
-
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://medapp.roadtours.in/api/product/read.php";
         final FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(this);
@@ -180,7 +179,8 @@ public class ActivitySplash extends AppCompatActivity {
                     @Override
                     public void onResponse(final String response) {
                         Log.v("thisisresponse", response);
-                        Parse(response);
+                       // Parse(response);
+                        new fetchdata().execute(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -190,6 +190,26 @@ public class ActivitySplash extends AppCompatActivity {
         });
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+    private class fetchdata extends AsyncTask<String,String, String>
+    {
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Parse(strings[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+           // Toast.makeText(ActivitySplash.this, ""+s, Toast.LENGTH_SHORT).show();
+            super.onPostExecute(s);
+        }
     }
 
     public void Parse(final String response) {
@@ -292,8 +312,6 @@ public class ActivitySplash extends AppCompatActivity {
                         String ques = jsonObject1.getString("ques");
                         String cno = jsonObject1.getString("cno");
                         String rno = jsonObject1.getString("rno");
-
-
                         dataQuestions11 = new DataQuestions1(String.valueOf(i), id, tid, years, subject1, part, chapter1, que, ques, cno, rno);
 
                         feedReaderDbHelper.addQuestions1(dataQuestions11);

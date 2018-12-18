@@ -12,12 +12,10 @@
         android:id="@+id/imageView"
         android:layout_width="335dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp"
-        android:src="@drawable/logoo"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/logo_updated1" />
 
     <TextView
         android:textColor="@android:color/white"
@@ -37,7 +35,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="103dp"
-        android:background="#e9882e"
+        android:background="#000166"
         android:gravity="center_vertical|center_horizontal"
         android:padding="10dp"
         android:text="1990-2018"
@@ -46,9 +44,7 @@
         android:textStyle="bold" />
 
     <ProgressBar
-
         android:layout_width="30dp"
-
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

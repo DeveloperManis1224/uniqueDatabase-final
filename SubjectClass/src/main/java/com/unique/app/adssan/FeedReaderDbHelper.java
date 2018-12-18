@@ -284,7 +284,6 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_QUESTIONS1_YEARS, dataQuestions1.getYears());
         values.put(COLUMN_QUESTIONS1_SUBJECT, dataQuestions1.getSubject());
         values.put(COLUMN_QUESTIONS1_PART, dataQuestions1.getPart());
-
         values.put(COLUMN_QUESTIONS1_CHAPTER, dataQuestions1.getChapter());
         values.put(COLUMN_QUESTIONS1_QUE, dataQuestions1.getQue());
         values.put(COLUMN_QUESTIONS1_CNO, dataQuestions1.getCno());
@@ -323,7 +322,6 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
             //array_list.add(res.getString(res.getColumnIndex(COLUMN_KEY)) +"@@"+res.getString(res.getColumnIndex(COLUMN_VALUE))+"@@"+res.getString(res.getColumnIndex(COLUMN_FLAG)));
 
             // array_list.add(res.getString(res.getColumnIndex(ID)) + "@@" + res.getString(res.getColumnIndex(COLUMN_SUB_CID)) + "@@" + res.getString(res.getColumnIndex(COLUMN_SUB_CATEGORY_NAME))+ "@@" + res.getString(res.getColumnIndex(COLUMN_SUB_YEAR)));
-
 
             // array_list.add(res.getString(res.getColumnIndex(COLUMN_SUB_CATEGORY_NAME)));
             card_subjectData = new CardSubjectData(res.getString(res.getColumnIndex(COLUMN_SUB_CATEGORY_NAME)));

@@ -36,7 +36,9 @@ public class ScoreView extends AppCompatActivity {
 
         Map<String,String> map = new HashMap<>();
         FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(this);
-        ArrayList<String> arrayList = feedReaderDbHelper.getSubjectAlone("1year");
+        SharedPreferences settings = getSharedPreferences("MyPref", MODE_PRIVATE);
+        String year11 = settings.getString("year", "");
+        ArrayList<String> arrayList = feedReaderDbHelper.getSubjectAlone(year11);
             ArrayList<CardScoreData> cardScoreData = new ArrayList<>();
         for(int i=0;i<arrayList.size();i++)
         {
@@ -54,8 +56,8 @@ public class ScoreView extends AppCompatActivity {
         mAdapter = new ViewAdapterScore(cardScoreData);
        mRecyclerView.setAdapter(mAdapter);
 
-        SharedPreferences settings = getSharedPreferences("MyPref", MODE_PRIVATE);
-        String year11 = settings.getString("year", "");
+
+
         int value= feedReaderDbHelper.getRead(year11);
         int value1  = feedReaderDbHelper.getUnRead(year11);
 
