@@ -95,4 +95,6 @@ feedback and appropriate suggestions.
         <string name="dr10">Dr. P.Sivakaran,MBBS.,MS(ORTHO)</string>
         <string name="dr11">Dr. J.Vasanth Kumar., MBBS.,</string>
         <string name="dr12">Dr. S.P.Vinoth Kumar., MBBS., MD (Paed)</string>
+
+    <string name="lbl_front">\u2022</string>
     </resources>

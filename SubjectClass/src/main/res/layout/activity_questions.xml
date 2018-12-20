@@ -65,6 +65,7 @@ tools:context="com.unique.app.adssan.ActivitySubject">
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="48dp"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/filter"

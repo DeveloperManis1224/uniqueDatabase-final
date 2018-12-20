@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import com.unique.app.adssan.R;
 
 public class ActivitySplash extends AppCompatActivity {
-    TextView textView;
+    TextView textView, txtLabel;
     ProgressDialog progressDialog;
     Handler handler;
 
@@ -45,6 +45,14 @@ public class ActivitySplash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        txtLabel = findViewById(R.id.label_front);
+
+        txtLabel.setText(getResources().getString(R.string.lbl_front)+ " First year MBBS \n"+
+                getResources().getString(R.string.lbl_front)+ " Second year MBBS \n"+
+                getResources().getString(R.string.lbl_front)+ " Pre-Final year MBBS \n"+
+                getResources().getString(R.string.lbl_front)+ " Final year MBBS \n");
+
+
         if(isInternetAvailable())
         {
             getAllData();
@@ -61,7 +69,8 @@ public class ActivitySplash extends AppCompatActivity {
        // FeedReaderDbHelper frdh = new FeedReaderDbHelper(ActivitySplash.this);
        // frdh.DEleteAll();
         String styledText = "MBBS <font color='red'>Uni</font>versity <font color='red'>Que</font>stions Collections";
-        textView.setText(Html.fromHtml(styledText), TextView.BufferType.SPANNABLE);
+       // textView.setText(Html.fromHtml(styledText), TextView.BufferType.SPANNABLE);
+        textView.setText("Subject and Chapter wise arranged with Performance desk");
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
         animation.setInterpolator(new LinearInterpolator());
         animation.setRepeatCount(Animation.INFINITE);

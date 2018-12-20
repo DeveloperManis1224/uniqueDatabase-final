@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -39,6 +40,7 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
     private static String LOG_TAG = "CardViewActivity";
     private DrawerLayout mDrawerLayout;
     Thread td;
+    Toolbar toolHead ;
 
     PieChart pieChart;
     Handler handler;
@@ -61,6 +63,9 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
 
+        toolHead = findViewById( R.id.toolbar);
+
+
         pieChart = (PieChart) findViewById(R.id.piechart);
         pieChart.setVisibility(View.GONE);
         FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(this);
@@ -70,6 +75,7 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
 
         int value= feedReaderDbHelper.getRead(year11);
         int value1  = feedReaderDbHelper.getUnRead(year11);
+        
 
         Log.v("readValue",""+getPercentage(value+value1,value1));
         getPercentage(value+value1,value1);
