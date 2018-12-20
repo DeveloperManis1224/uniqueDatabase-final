@@ -1,14 +1,18 @@
 package com.unique.app.adssan;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
@@ -112,6 +116,64 @@ public class ActivityChapters extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home){ // use android.R.id
+            mDrawerLayout.openDrawer(Gravity.LEFT);
+        }
+        int id = item.getItemId();
+        if (id == R.id.cart_btn_bar) {
+//            session.setPreferences(HomeActivity.this,Constants.LOGIN_STATUS,Constants.LOGOUT);
+//            startActivity(new Intent(HomeActivity.this,HomeActivity.class));
+//            Toast.makeText(this, "Logout Successfull", Toast.LENGTH_SHORT).show();
+            SharedPreferences settings = getSharedPreferences("MyPref", MODE_PRIVATE);
+            String year11 = settings.getString("year", "");
+
+            String msg = "";
+            if(year11.equalsIgnoreCase("1year"))
+            {
+                msg = "First Year MBBS";
+            }
+            else if(year11.equalsIgnoreCase("2year"))
+            {
+                msg = "Second Year MBBS";
+            }
+            else if(year11.equalsIgnoreCase("3year"))
+            {
+                msg = "Pre Final Year MBBS";
+            }
+            else if(year11.equalsIgnoreCase("4year"))
+            {
+                msg = "Final Year MBBS";
+            }
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(ActivityChapters.this);
+            builder1.setTitle("Current Page");
+            builder1.setMessage(""+msg +" - "+getIntent().getStringExtra("subject")+" - "+
+                    getIntent().getStringExtra("part"));
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "Close",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public ArrayList<CardChapterData> getDataSet(String subjectname, String part) {
 
         FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(this);
@@ -119,15 +181,6 @@ public class ActivityChapters extends AppCompatActivity {
 
 
         return aaaa;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == android.R.id.home){ // use android.R.id
-            mDrawerLayout.openDrawer(Gravity.LEFT);
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

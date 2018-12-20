@@ -24,11 +24,10 @@
             <ImageView
                 android:id="@+id/main.imageview.placeholder"
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
-
+                android:layout_height="270dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/logo_updated2"
-                android:paddingBottom="120dp"
+                android:paddingBottom="150dp"
                 android:tint="#11000000"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.9" />
