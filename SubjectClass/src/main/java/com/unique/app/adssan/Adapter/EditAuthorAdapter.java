@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +37,6 @@ public class EditAuthorAdapter extends RecyclerView
             txtDr = (TextView) itemView.findViewById(R.id.txt_dr);
            drImg = (ImageView) itemView.findViewById(R.id.img_dr);
         }
-
-
     }
 
     public EditAuthorAdapter(ArrayList<DataEditorial> myDataset) {
@@ -62,7 +61,13 @@ public class EditAuthorAdapter extends RecyclerView
         holder.txtDr.setText(mDataset.get(position).get_drName());
 
 
-        Glide.with(holder.drImg.getContext()).load(mDataset.get(position).get_drImage()).into(holder.drImg);
+        if(mDataset.get(position).get_drName().equalsIgnoreCase("Subjects Contributors")) {
+        holder.drImg.setVisibility(View.GONE);
+        holder.txtDr.setGravity(Gravity.CENTER);
+        }
+        else {
+            Glide.with(holder.drImg.getContext()).load(mDataset.get(position).get_drImage()).into(holder.drImg);
+        }
 
     }
 

@@ -15,7 +15,7 @@ public class EditorialBoard extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private Integer imgList[] = { R.drawable.dr1,
-            R.drawable.dr2, R.drawable.dr3,
+            R.drawable.dr2, R.drawable.dr1, R.drawable.dr3,
             R.drawable.dr4, R.drawable.dr5,
             R.drawable.dr6, R.drawable.dr7,
             R.drawable.dr8, R.drawable.dr9,
@@ -23,7 +23,7 @@ public class EditorialBoard extends AppCompatActivity {
             R.drawable.dr12
             };
     private String drNameList[] = new String[]{"Dr. P.Meganathan., MBBS., MD (Paed). Editor in Chief",
-    "Dr. L.Ramya Meganathan MBBS. Co-Editor Subjects Contributors",
+    "Dr. L.Ramya Meganathan MBBS. Co-Editor ","Subjects Contributors",
     "Dr. S.Anton Remith Riche MBBS., DCH., DNB.,",
     "Dr. S.Aravind MBBS., MD (GM)",
     "Dr. P.T.Lakshmipriya, MBBS.,",

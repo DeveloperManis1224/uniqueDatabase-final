@@ -28,12 +28,15 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
 import angtrim.com.fivestarslibrary.NegativeReviewListener;
 import angtrim.com.fivestarslibrary.ReviewListener;
+
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.unique.app.adssan.R;
 
 public class ActivitySubject extends AppCompatActivity implements NegativeReviewListener, ReviewListener {
@@ -255,7 +258,13 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
         xVals.add("Read");
         xVals.add("Un Read");
         PieData data = new PieData(xVals, dataSet);
-        data.setValueFormatter(new PercentFormatter());
+        ValueFormatter formatter = new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return ""+((int) value);
+            }
+        };
+        data.setValueFormatter(formatter);
         dataSet.setColors(ColorTemplate.PASTEL_COLORS);
         pieChart.setData(data);
     }

@@ -136,10 +136,11 @@ public class ActivityQuestions extends AppCompatActivity implements NegativeRevi
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popup = new PopupMenu(ActivityQuestions.this, imageView3);
+                PopupMenu popup = new PopupMenu(ActivityQuestions.this, filter);
                 //Inflating the Popup using xml file
                 popup.getMenuInflater()
                         .inflate(R.menu.popup_menu, popup.getMenu());
+                popup.setGravity(Gravity.CENTER);
 
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -214,15 +215,9 @@ public class ActivityQuestions extends AppCompatActivity implements NegativeRevi
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-
-
                 String selected = adapterView.getItemAtPosition(i).toString();
                 Toast.makeText(getApplicationContext(),selected,Toast.LENGTH_LONG).show();
-
-
                 mAdapter = new ViewAdapterQuestions(feedReaderDbHelper.getQuestionsusingReadSpinner(subject, part, chapter, year,selected));
-
                 mRecyclerView.setAdapter(null);
                 mRecyclerView.setAdapter(mAdapter);
             }
@@ -303,6 +298,7 @@ public class ActivityQuestions extends AppCompatActivity implements NegativeRevi
                 });
 
     }
+
     public void initTwoStage (){
         TwoStageRate twoStageRate = TwoStageRate.with(this);
         //Setting conditions

@@ -13,12 +13,14 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.unique.app.adssan.R;
 
 public class ScoreView extends AppCompatActivity {
@@ -72,14 +74,16 @@ public class ScoreView extends AppCompatActivity {
 
         PieDataSet dataSet = new PieDataSet(yvalues, "");
         ArrayList<String> xVals = new ArrayList<String>();
-
         xVals.add("Read");
         xVals.add("Un Read");
-
-
         PieData data = new PieData(xVals, dataSet);
-
-        data.setValueFormatter(new PercentFormatter());
+        ValueFormatter formatter = new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return ""+((int) value);
+            }
+        };
+        data.setValueFormatter(formatter);
         dataSet.setColors(ColorTemplate.PASTEL_COLORS);
         pieChart.setData(data);
     }
