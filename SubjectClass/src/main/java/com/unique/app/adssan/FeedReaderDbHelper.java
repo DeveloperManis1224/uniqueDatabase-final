@@ -60,19 +60,19 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     private static final String TABLE_READ_UNREAD ="read_unread";
 
     private static final String SQL_CREATE_TABLE_SUBJECT = "CREATE TABLE " + FeedReaderDbHelper.TABLE_NAME_SUBJECT + " (" +
-            FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY," +
+            FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             FeedReaderDbHelper.COLUMN_SUB_CID + " TEXT," +
             FeedReaderDbHelper.COLUMN_SUB_CATEGORY_NAME + " TEXT," +
             FeedReaderDbHelper.COLUMN_SUB_YEAR + " TEXT)";
 
 
     private static final String SQL_CREATE_READ_UNREAD = "CREATE TABLE " + FeedReaderDbHelper.TABLE_READ_UNREAD + " (" +
-            FeedReaderDbHelper.COLUMN_STS_ID + " INTEGER PRIMARY KEY," +
+            FeedReaderDbHelper.COLUMN_STS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             FeedReaderDbHelper.COLUMN_QUESTIONS + " TEXT," +
             FeedReaderDbHelper.COLUMN_STATUS + " TEXT)";
 
     private static final String SQL_CREATE_TABLE_CHAPTER = "CREATE TABLE " + FeedReaderDbHelper.TABLE_NAME_CHAPTER + " (" +
-            FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY," +
+            FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             FeedReaderDbHelper.COLUMN_ID + " TEXT," +
             FeedReaderDbHelper.COLUMN_CHAPTER_NAME + " TEXT," +
             FeedReaderDbHelper.COLUMN_CHAPTER_SUBJECT + " TEXT," +
@@ -80,7 +80,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
 
     private static final String SQL_CREATE_TABLE_QUESTIONS = "CREATE TABLE " + FeedReaderDbHelper.TABLE_NAME_QUESTIONS + " (" +
-            FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY," +
+            FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             FeedReaderDbHelper.COLUMNT_QUESTIONS_ID + " TEXT," +
             FeedReaderDbHelper.COLUMNT_QUESTIONS_YEAR + " TEXT," +
             FeedReaderDbHelper.COLUMN_QUESTIONS_SUBJECT + " TEXT," +
@@ -90,7 +90,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
 
     private static final String SQL_CREATE_TABLE_QUESTIONS1 = "CREATE TABLE " + FeedReaderDbHelper.TABLE_NAME_QUESTIONS1 + " (" +
-            FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY," +
+            FeedReaderDbHelper.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             FeedReaderDbHelper.COLUMNT_QUESTIONS1_ID1 + " TEXT," +
             FeedReaderDbHelper.COLUMNT_QUESTIONS1_STATUS + " TEXT," +
             FeedReaderDbHelper.COLUMNT_QUESTIONS1_TID + " TEXT," +
@@ -135,7 +135,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ID, chapter.getId());
+//        values.put(ID, chapter.getId());
         values.put(COLUMN_SUB_CID, chapter.getCid());
         values.put(COLUMN_SUB_CATEGORY_NAME, chapter.getCategory_name());
         values.put(COLUMN_SUB_YEAR, chapter.getYear());
@@ -160,7 +160,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ID, dataChapter.getId());
+//        values.put(ID, dataChapter.getId());
         values.put(COLUMN_ID, dataChapter.getColumnid());
         values.put(COLUMN_CHAPTER_NAME, dataChapter.getChapter_name());
         values.put(COLUMN_CHAPTER_SUBJECT, dataChapter.getSubject());
@@ -251,7 +251,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ID, dataQuestions.getId());
+//        values.put(ID, dataQuestions.getId());
         values.put(COLUMNT_QUESTIONS_ID, dataQuestions.getTid());
         values.put(COLUMNT_QUESTIONS_YEAR, dataQuestions.getYears());
         values.put(COLUMN_QUESTIONS_SUBJECT, dataQuestions.getSubject());
@@ -277,7 +277,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ID, dataQuestions1.getIdvalue());
+//        values.put(ID, dataQuestions1.getIdvalue());
         values.put(COLUMNT_QUESTIONS1_TID, dataQuestions1.getTid());
         values.put(COLUMN_QUESTIONS1_QUES, dataQuestions1.getQues());
         values.put(COLUMN_QUESTIONS1_CNO, dataQuestions1.getCno());
@@ -357,6 +357,41 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
         return array_list;
 
+
+    }
+
+
+    public void setColor(String ques) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Log.v("forgetchapter1244", "update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " + " where " + ID + " = " + "'" + ques+"';" );
+        Cursor res = db.rawQuery("update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " +" where " + ID + " = " + "'" + ques + "';", null);
+        // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
+        res.moveToFirst();
+        db.close();
+    }
+
+    public void removeColor(String ques) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Log.v("forgetchapter1244", "update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " + " where " + ID + " = " + "'" + ques+"';" );
+        Cursor res = db.rawQuery("update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 0 " +" where " + ID + " = " + "'" + ques + "';", null);
+        // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
+        res.moveToFirst();
+        db.close();
+    }
+    public boolean checkColor(String ques) {
+
+        String checkquery="SELECT Count(*) as data FROM "+TABLE_NAME_QUESTIONS1 + " where " + ID + " = " + "'" + ques+"' and "+COLUMNT_QUESTIONS1_STATUS+"=1 ";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Log.v("forgetchapter1244", checkquery );
+        Cursor res = db.rawQuery(checkquery, null);
+        res.moveToFirst();
+
+        int value=res.getInt(0);
+        db.close();
+
+        return value >= 1;
 
     }
 
@@ -632,15 +667,15 @@ public ArrayList<PartModel> getPartNames(String subject) {
 
     }
 
-    public void setColor(String ques) {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Log.v("forgetchapter1244", "update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " + " where " + ID + " = " + "'" + ques+"';" );
-        Cursor res = db.rawQuery("update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " +" where " + ID + " = " + "'" + ques + "';", null);
-        // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
-        res.moveToFirst();
-        db.close();
-    }
+//    public void setColor(String ques) {
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Log.v("forgetchapter1244", "update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " + " where " + ID + " = " + "'" + ques+"';" );
+//        Cursor res = db.rawQuery("update " + TABLE_NAME_QUESTIONS1 + " SET " + COLUMNT_QUESTIONS1_STATUS + " = 1 " +" where " + ID + " = " + "'" + ques + "';", null);
+//        // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
+//        res.moveToFirst();
+//        db.close();
+//    }
 
     public String getColor(String ques) {
         SQLiteDatabase db = this.getReadableDatabase();
