@@ -36,41 +36,41 @@ public class ViewAdapterChapter extends RecyclerView
             relativeLayout = itemView.findViewById(R.id.button2);
             context = itemView.getContext();
             oneletter = itemView.findViewById(R.id.oneletter);
-            relativeLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.v("sadasdasdas", label.getText().toString());
-//                    FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(context);
-//                    feedReaderDbHelper.getChapter(label.getText().toString());
+//            relativeLayout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Log.v("sadasdasdas", label.getText().toString());
+////                    FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(context);
+////                    feedReaderDbHelper.getChapter(label.getText().toString());
+////
+////                    SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", context.MODE_PRIVATE);
+////                    SharedPreferences.Editor editor = pref.edit();
+////
+////                    editor.putString("chapter", label.getText().toString());
+////
+////
+////                    editor.apply(); // commit changes
+////
+////                    Intent intent = new Intent(context, ActivityQuestions.class);
+////                    intent.putExtra("chapter", label.getText().toString());
+////
+////                    context.startActivity(intent);
 //
 //                    SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", context.MODE_PRIVATE);
 //                    SharedPreferences.Editor editor = pref.edit();
 //
-//                    editor.putString("chapter", label.getText().toString());
 //
+//                    editor.putString("chapter", label.getText().toString()); // Saving string
 //
-//                    editor.apply(); // commit changes
+//                    editor.apply(); //
 //
-//                    Intent intent = new Intent(context, ActivityQuestions.class);
+//                    Intent intent = new Intent(context, SelectType.class);
 //                    intent.putExtra("chapter", label.getText().toString());
-//
+//                    // intent.putExtra("selected",label.getText().toString());
 //                    context.startActivity(intent);
-
-                    SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
-
-
-                    editor.putString("chapter", label.getText().toString()); // Saving string
-
-                    editor.apply(); //
-
-                    Intent intent = new Intent(context, SelectType.class);
-                    intent.putExtra("chapter", label.getText().toString());
-                    // intent.putExtra("selected",label.getText().toString());
-                    context.startActivity(intent);
-
-                }
-            });
+//
+//                }
+//            });
             Log.i(LOG_TAG, "Adding Listener");
 
         }
@@ -94,8 +94,43 @@ public class ViewAdapterChapter extends RecyclerView
     }
 
     @Override
-    public void onBindViewHolder(DataObjectHolder holder, int position) {
+    public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         holder.label.setText(mDataset.get(position).getChaptername());
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.v("sadasdasdas", mDataset.get(position).getChaptername());
+//                    FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(context);
+//                    feedReaderDbHelper.getChapter(label.getText().toString());
+//
+//                    SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = pref.edit();
+//
+//                    editor.putString("chapter", label.getText().toString());
+//
+//
+//                    editor.apply(); // commit changes
+//
+//                    Intent intent = new Intent(context, ActivityQuestions.class);
+//                    intent.putExtra("chapter", label.getText().toString());
+//
+//                    context.startActivity(intent);
+
+                SharedPreferences pref = holder.context.getSharedPreferences("MyPref", holder.context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+
+
+                editor.putString("chapter", mDataset.get(position).getChaptername()); // Saving string
+
+                editor.apply(); //
+
+                Intent intent = new Intent(holder.context, SelectType.class);
+                intent.putExtra("chapter", mDataset.get(position).getChaptername());
+                // intent.putExtra("selected",label.getText().toString());
+                holder.context.startActivity(intent);
+
+            }
+        });
 
     }
 
