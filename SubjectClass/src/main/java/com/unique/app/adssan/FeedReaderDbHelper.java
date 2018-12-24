@@ -315,7 +315,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         CardSubjectData card_subjectData = null;
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME_SUBJECT + " where " + COLUMN_SUB_YEAR + " = " + "'" + year + "'", null);
+        Cursor res = db.rawQuery("select DISTINCT * from " + TABLE_NAME_SUBJECT + " where " + COLUMN_SUB_YEAR + " = " + "'" + year + "'", null);
         res.moveToFirst();
          Log.v("asdasdsadasdsad","select * from " + TABLE_NAME_SUBJECT+" where "+COLUMN_SUB_YEAR+" = "+"'"+year+"'");
         while (res.isAfterLast() == false) {

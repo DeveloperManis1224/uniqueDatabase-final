@@ -35,8 +35,8 @@ public class ActivitySignUp extends Activity {
     String message;
     RadioButton student, teacher;
     Spinner spinner;
-    String[] studentarray = new String[]{"YEAR 1", "YEAR 2", "YEAR 3", "YEAR 4"};
-    String[] teacherarray = new String[]{"YEAR 1", "YEAR 2", "YEAR 3", "YEAR 4"};
+    String[] studentarray = new String[]{"First Year MBBS", "Second Year MBBS", "Pre-Final Year MBBS", "Final Year MBBS"};
+    String[] teacherarray = new String[]{"First Year MBBS", "Second Year MBBS", "Pre-Final Year MBBS", "Final Year MBBS"};
     RelativeLayout button;
     EditText mobileno;
 
@@ -120,15 +120,15 @@ public class ActivitySignUp extends Activity {
                     role = "teacher";
 
                 }
-                if (spinner.getSelectedItem().toString() == "YEAR 1") {
+                if (spinner.getSelectedItem().toString() == "First Year MBBS") {
                     year = "1year";
-                } else if (spinner.getSelectedItem().toString() == "YEAR 2") {
+                } else if (spinner.getSelectedItem().toString() == "Second Year MBBS") {
                     year = "2year";
                 }
-                if (spinner.getSelectedItem().toString() == "YEAR 3") {
+                if (spinner.getSelectedItem().toString() == "Pre-Final Year MBBS") {
                     year = "3year";
                 }
-                if (spinner.getSelectedItem().toString() == "YEAR 4") {
+                if (spinner.getSelectedItem().toString() == "Final Year MBBS") {
                     year = "4year";
                 }
                 if (spinner.getSelectedItem().toString() == "YEAR 5") {

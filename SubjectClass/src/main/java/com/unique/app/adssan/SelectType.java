@@ -49,10 +49,10 @@ public class SelectType extends AppCompatActivity {
         return quelist;
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent in = new Intent(SelectType.this,ActivitySubject.class);
-        startActivity(in);
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent in = new Intent(SelectType.this,ActivityChapters.class);
+//        startActivity(in);
+//        finish();
+//    }
 }

@@ -61,7 +61,7 @@ tools:context="com.unique.app.adssan.ActivitySubject">
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:padding="10dp"
-            android:src="@drawable/filter"
+            android:src="@mipmap/sort_icon"
             tools:ignore="RtlCompat" />
 
         <ImageView

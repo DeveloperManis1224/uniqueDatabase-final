@@ -14,13 +14,13 @@ public class EditorialBoard extends AppCompatActivity {
     private RecyclerView listView;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private Integer imgList[] = { R.drawable.dr1,
-            R.drawable.dr2, R.drawable.dr1, R.drawable.dr3,
-            R.drawable.dr4, R.drawable.dr5,
-            R.drawable.dr6, R.drawable.dr7,
-            R.drawable.dr8, R.drawable.dr9,
-            R.drawable.dr10, R.drawable.dr11,
-            R.drawable.dr12
+    private Integer imgList[] = { R.mipmap.dr1,
+            R.mipmap.dr2, R.mipmap.dr1, R.mipmap.dr3,
+            R.mipmap.dr4, R.mipmap.dr5,
+            R.mipmap.dr6, R.mipmap.dr7,
+            R.mipmap.dr8, R.mipmap.dr9,
+            R.mipmap.dr10, R.mipmap.dr11,
+            R.mipmap.dr12
             };
     private String drNameList[] = new String[]{"Dr. P.Meganathan., MBBS., MD (Paed). Editor in Chief",
     "Dr. L.Ramya Meganathan MBBS. Co-Editor ","Subjects Contributors",
@@ -44,7 +44,7 @@ public class EditorialBoard extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         listView.setLayoutManager(mLayoutManager);
 
-        for(int i = 0;i<12;i++)
+        for(int i = 0;i<13;i++)
         {
             name.add(new DataEditorial(drNameList[i],imgList[i]));
         }

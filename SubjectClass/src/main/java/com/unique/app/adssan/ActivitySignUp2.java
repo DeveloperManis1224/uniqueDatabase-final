@@ -72,7 +72,7 @@ public class ActivitySignUp2 extends AppCompatActivity {
             "Tirunelveli Medical College,Tirunelveli",
             "Trichy SRM Medical College Hospital & Research Centre, Trichy",
             "Velammal Medical College Hospital and Research Institute, Madurai",
-            "Vinayaka Missions Kirupananda Variyar Medical College, Salem"};
+            "Vinayaka Missions Kirupananda Variyar Medical College, Salem","Others"};
 
     public void onClickGoogle(View v)
     {

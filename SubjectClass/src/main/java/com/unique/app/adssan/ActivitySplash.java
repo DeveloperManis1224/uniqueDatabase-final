@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -51,16 +52,31 @@ public class ActivitySplash extends AppCompatActivity {
                 getResources().getString(R.string.lbl_front)+ " Second year MBBS \n"+
                 getResources().getString(R.string.lbl_front)+ " Pre-Final year MBBS \n"+
                 getResources().getString(R.string.lbl_front)+ " Final year MBBS \n");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!prefs.getBoolean("firstTime", false)) {
+            if(isInternetAvailable())
+            {
+                getAllData();
+            }
+            else
+            {
+                noInternetAlert();
+            }
 
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("firstTime", true);
+            editor.commit();
+        }
 
-        if(isInternetAvailable())
-        {
-            getAllData();
-        }
-        else
-        {
-            noInternetAlert();
-        }
+//        if(isInternetAvailable())
+//        {
+//            getAllData();
+//        }
+//        else
+//        {
+//            noInternetAlert();
+//        }
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Fetching...");
         progressDialog.setCancelable(false);
@@ -216,7 +232,7 @@ public class ActivitySplash extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-           // Toast.makeText(ActivitySplash.this, ""+s, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivitySplash.this, "Question updated...", Toast.LENGTH_SHORT).show();
             super.onPostExecute(s);
         }
     }

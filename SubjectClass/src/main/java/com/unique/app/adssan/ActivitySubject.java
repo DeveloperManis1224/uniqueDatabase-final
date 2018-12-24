@@ -304,7 +304,7 @@ public class ActivitySubject extends AppCompatActivity implements NegativeReview
             }
             else if(year11.equalsIgnoreCase("3year"))
             {
-                msg = "Pre Final Year MBBS - Subject";
+                msg = "Pre-Final Year MBBS - Subject";
             }
             else if(year11.equalsIgnoreCase("4year"))
             {
