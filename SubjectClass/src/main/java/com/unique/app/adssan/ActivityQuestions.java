@@ -42,12 +42,12 @@ public class ActivityQuestions extends AppCompatActivity implements NegativeRevi
     Spinner spinner;
     android.widget.TextView pathLocation;
 
-    @Override
-    public void onBackPressed() {
-        Intent in = new Intent(ActivityQuestions.this,SelectType.class);
-        startActivity(in);
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent in = new Intent(ActivityQuestions.this,SelectType.class);
+//        startActivity(in);
+//        finish();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
