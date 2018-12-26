@@ -229,13 +229,30 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         Log.v("forgetchapter", "select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT + " =" + "'" + subject + "'" + " and " + COLUMN_QUESTIONS1_PART + " = " + "'" + part + "'" + " and " + COLUMN_QUESTIONS1_CHAPTER + " = " + "'" + chapter + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'");
         Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT + " =" + "'" + subject + "'" + " and " + COLUMN_QUESTIONS1_PART + " = " + "'" + part + "'" + " and " + COLUMN_QUESTIONS1_CHAPTER + " = " + "'" + chapter + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'  GROUP BY "+COLUMN_QUESTIONS1_QUE, null);
         // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
+
+        int count = 0;
         res.moveToFirst();
 
         while (res.isAfterLast() == false) {
             //array_list.add(res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUE)));
-            typeModel = new TypeModel(res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUE)));
+
             Log.v("forgetchapter1212",""+res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUE)));
-            array_list.add(typeModel);
+//            if(res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUE)).equalsIgnoreCase("Essay"))
+//            {
+//array_list.set(count,new TypeModel(res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUE))));
+//count++;
+//            }
+//            if(res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUE)).equalsIgnoreCase("Short Notes"))
+//            {
+//                array_list.set(count,new TypeModel(res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUE))));
+//                count++;
+//            }
+//            else
+//            {
+                typeModel = new TypeModel(res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUE)));
+                array_list.add(typeModel);
+//            }
+
             // Log.v("thisisforquestions", res.getString(res.getColumnIndex(COLUMN_QUESTIONS1_QUES)));
             res.moveToNext();
         }
@@ -788,19 +805,12 @@ public ArrayList<PartModel> getPartNames(String subject) {
 
     public ArrayList<CardQuestionsData> getQuestionsusingRNO(String subject, String part, String chapter, String year, String type) {
 
-
-//        values.put(ID, chapter.getId());
-//        values.put(COLUMN_ID, chapter.getColumnid());
-//        values.put(COLUMN_CHAPTER_NAME, chapter.getChapter_name());
-//        values.put(COLUMN_CHAPTER_SUBJECT, chapter.getSubject());
-//        values.put(COLUMN_CHAPTER_YEAR, chapter.getYear());
-
         ArrayList<CardQuestionsData> array_list = new ArrayList<CardQuestionsData>();
         CardQuestionsData card_subjectData = null;
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
         Log.v("forgetchapter", "select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT + " =" + "'" + subject + "'" + " and " + COLUMN_QUESTIONS1_PART + " = " + "'" + part + "'" + " and " + COLUMN_QUESTIONS1_CHAPTER + " = " + "'" + chapter + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'");
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT + " =" + "'" + subject + "'" + " and " + COLUMN_QUESTIONS1_PART + " = " + "'" + part + "'" + " and " + COLUMN_QUESTIONS1_CHAPTER + " = " + "'" + chapter + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'" + " and " + COLUMN_QUESTIONS1_QUE + " = " + "'" + type + "'" + "ORDER BY " + COLUMN_QUESTIONS1_RNO + " DESC", null);
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT + " =" + "'" + subject + "'" + " and " + COLUMN_QUESTIONS1_PART + " = " + "'" + part + "'" + " and " + COLUMN_QUESTIONS1_CHAPTER + " = " + "'" + chapter + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'" + " and " + COLUMN_QUESTIONS1_QUE + " = " + "'" + type + "'" + "ORDER BY " + COLUMN_QUESTIONS1_RNO +" , "+ID+ " ASC", null);
         // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
         res.moveToFirst();
 

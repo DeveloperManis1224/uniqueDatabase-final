@@ -45,6 +45,38 @@ public class SelectType extends AppCompatActivity {
         Log.d("asdasdasdasd", subject + part + chapter);
         FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(SelectType.this);
         ArrayList<TypeModel> quelist = feedReaderDbHelper.getTypeQuest(subject, part, chapter, year);
+        ArrayList<String> orderList = new ArrayList<>();
+        int count =0 ;
+//        for(int i = 0; i<quelist.size(); i++)
+//        {
+//            if(quelist.get(i).toString().equalsIgnoreCase("Essay"))
+//            {
+//                quelist.set(count,new TypeModel(quelist.get(i).toString()));
+//                count++;
+//            }else
+//            if(quelist.get(i).toString().equalsIgnoreCase("Short Notes"))
+//            {
+//                quelist.set(count,new TypeModel(quelist.get(i).toString()));
+//                count++;
+//            }else
+//            if(quelist.get(i).toString().equalsIgnoreCase("Short Answers"))
+//            {
+//                quelist.set(count,new TypeModel(quelist.get(i).toString()));
+//                count++;
+//            }
+//        }
+
+        if(quelist.size()==3)
+        {
+            quelist.set(1,new TypeModel("Short Notes"));
+            quelist.set(2,new TypeModel("Short Answers"));
+        }
+        else
+             if(quelist.size()==2)
+             {
+                 quelist.set(0,new TypeModel("Short Notes"));
+                 quelist.set(1,new TypeModel("Short Answers"));
+             }
 
         return quelist;
     }
