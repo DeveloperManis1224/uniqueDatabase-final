@@ -101,7 +101,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
             FeedReaderDbHelper.COLUMN_QUESTIONS1_PART + " TEXT," +
             FeedReaderDbHelper.COLUMN_QUESTIONS1_CHAPTER + " TEXT," +
             FeedReaderDbHelper.COLUMN_QUESTIONS1_QUE + " TEXT," +
-            FeedReaderDbHelper.COLUMN_QUESTIONS1_RNO + " TEXT)";
+            FeedReaderDbHelper.COLUMN_QUESTIONS1_RNO + " INTEGER)";
 
 
     public FeedReaderDbHelper(Context context) {
@@ -114,9 +114,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_CHAPTER);
         db.execSQL(SQL_CREATE_TABLE_QUESTIONS);
         db.execSQL(SQL_CREATE_TABLE_QUESTIONS1);
-
         db.execSQL(SQL_CREATE_READ_UNREAD);
-
     }
 
     @Override
@@ -810,7 +808,7 @@ public ArrayList<PartModel> getPartNames(String subject) {
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
         Log.v("forgetchapter", "select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT + " =" + "'" + subject + "'" + " and " + COLUMN_QUESTIONS1_PART + " = " + "'" + part + "'" + " and " + COLUMN_QUESTIONS1_CHAPTER + " = " + "'" + chapter + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'");
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT + " =" + "'" + subject + "'" + " and " + COLUMN_QUESTIONS1_PART + " = " + "'" + part + "'" + " and " + COLUMN_QUESTIONS1_CHAPTER + " = " + "'" + chapter + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'" + " and " + COLUMN_QUESTIONS1_QUE + " = " + "'" + type + "'" + "ORDER BY " + COLUMN_QUESTIONS1_RNO +" , "+ID+ " ASC", null);
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME_QUESTIONS1 + " where " + COLUMN_QUESTIONS1_SUBJECT + " =" + "'" + subject + "'" + " and " + COLUMN_QUESTIONS1_PART + " = " + "'" + part + "'" + " and " + COLUMN_QUESTIONS1_CHAPTER + " = " + "'" + chapter + "'" + " and " + COLUMN_QUESTIONS1_YEARS + " = " + "'" + year + "'" + " and " + COLUMN_QUESTIONS1_QUE + " = " + "'" + type + "'" + "ORDER BY " + COLUMN_QUESTIONS1_RNO + " DESC", null);
         // Log.v("forgetchapter","select "+COLUMN_CHAPTER_NAME+" from " + TABLE_NAME_CHAPTER +"where "+COLUMN_CHAPTER_NAME+" ="+"'"+chaptername+"'");
         res.moveToFirst();
 
