@@ -119,14 +119,13 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_SUBJECT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_QUESTIONS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_QUESTIONS1);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CHAPTER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_READ_UNREAD);
         onCreate(db);
-
-
     }
 
     public void addSubject(DataSubject chapter) {
