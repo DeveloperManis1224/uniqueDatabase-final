@@ -126,6 +126,8 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME_CHAPTER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_READ_UNREAD);
         onCreate(db);
+
+
     }
 
     public void addSubject(DataSubject chapter) {
