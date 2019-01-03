@@ -133,12 +133,18 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     public void addSubject(DataSubject chapter) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
 //        values.put(ID, chapter.getId());
-        values.put(COLUMN_SUB_CID, chapter.getCid());
-        values.put(COLUMN_SUB_CATEGORY_NAME, chapter.getCategory_name());
-        values.put(COLUMN_SUB_YEAR, chapter.getYear());
-        db.insert(TABLE_NAME_SUBJECT, null, values);
+            values.put(COLUMN_SUB_CID, chapter.getCid());
+            values.put(COLUMN_SUB_CATEGORY_NAME, chapter.getCategory_name());
+            values.put(COLUMN_SUB_YEAR, chapter.getYear());
+            db.insert(TABLE_NAME_SUBJECT, null, values);
+            db.setTransactionSuccessful();
+        }finally {
+            db.endTransaction();
+        }
         // PrintAllParam();
         db.close();
 
@@ -156,16 +162,20 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 
 
     public void addChapter(DataChapter dataChapter) {
-
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
 //        values.put(ID, dataChapter.getId());
-        values.put(COLUMN_ID, dataChapter.getColumnid());
-        values.put(COLUMN_CHAPTER_NAME, dataChapter.getChapter_name());
-        values.put(COLUMN_CHAPTER_SUBJECT, dataChapter.getSubject());
-        values.put(COLUMN_CHAPTER_YEAR, dataChapter.getYear());
-
-        db.insert(TABLE_NAME_CHAPTER, null, values);
+            values.put(COLUMN_ID, dataChapter.getColumnid());
+            values.put(COLUMN_CHAPTER_NAME, dataChapter.getChapter_name());
+            values.put(COLUMN_CHAPTER_SUBJECT, dataChapter.getSubject());
+            values.put(COLUMN_CHAPTER_YEAR, dataChapter.getYear());
+            db.insert(TABLE_NAME_CHAPTER, null, values);
+            db.setTransactionSuccessful();
+        }finally {
+            db.endTransaction();
+        }
         // PrintAllParam();
         db.close();
 
@@ -266,15 +276,21 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     public void addQuestions(DataQuestions dataQuestions) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
 //        values.put(ID, dataQuestions.getId());
-        values.put(COLUMNT_QUESTIONS_ID, dataQuestions.getTid());
-        values.put(COLUMNT_QUESTIONS_YEAR, dataQuestions.getYears());
-        values.put(COLUMN_QUESTIONS_SUBJECT, dataQuestions.getSubject());
-        values.put(COLUMN_QUESTIONS_CHAPTERNAME, dataQuestions.getChapter_name());
-        values.put(COLUMN_QUESTIONS_CHAPTERPART, dataQuestions.getQue());
-        values.put(COLUMN_QUESTIONS_QUE, dataQuestions.getQue());
-        db.insert(TABLE_NAME_QUESTIONS, null, values);
+            values.put(COLUMNT_QUESTIONS_ID, dataQuestions.getTid());
+            values.put(COLUMNT_QUESTIONS_YEAR, dataQuestions.getYears());
+            values.put(COLUMN_QUESTIONS_SUBJECT, dataQuestions.getSubject());
+            values.put(COLUMN_QUESTIONS_CHAPTERNAME, dataQuestions.getChapter_name());
+            values.put(COLUMN_QUESTIONS_CHAPTERPART, dataQuestions.getQue());
+            values.put(COLUMN_QUESTIONS_QUE, dataQuestions.getQue());
+            db.insert(TABLE_NAME_QUESTIONS, null, values);
+            db.setTransactionSuccessful();
+        }finally {
+            db.endTransaction();
+        }
         //PrintAllParam();
         db.close();
 
@@ -292,20 +308,26 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     public void addQuestions1(DataQuestions1 dataQuestions1) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        db.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
 //        values.put(ID, dataQuestions1.getIdvalue());
-        values.put(COLUMNT_QUESTIONS1_TID, dataQuestions1.getTid());
-        values.put(COLUMN_QUESTIONS1_QUES, dataQuestions1.getQues());
-        values.put(COLUMN_QUESTIONS1_CNO, dataQuestions1.getCno());
-        values.put(COLUMN_QUESTIONS1_YEARS, dataQuestions1.getYears());
-        values.put(COLUMN_QUESTIONS1_SUBJECT, dataQuestions1.getSubject());
-        values.put(COLUMN_QUESTIONS1_PART, dataQuestions1.getPart());
-        values.put(COLUMN_QUESTIONS1_CHAPTER, dataQuestions1.getChapter());
-        values.put(COLUMN_QUESTIONS1_QUE, dataQuestions1.getQue());
-        values.put(COLUMN_QUESTIONS1_CNO, dataQuestions1.getCno());
-        values.put(COLUMN_QUESTIONS1_RNO, dataQuestions1.getRno());
-        values.put(COLUMNT_QUESTIONS1_STATUS,"0");
-        db.insert(TABLE_NAME_QUESTIONS1, null, values);
+            values.put(COLUMNT_QUESTIONS1_TID, dataQuestions1.getTid());
+            values.put(COLUMN_QUESTIONS1_QUES, dataQuestions1.getQues());
+            values.put(COLUMN_QUESTIONS1_CNO, dataQuestions1.getCno());
+            values.put(COLUMN_QUESTIONS1_YEARS, dataQuestions1.getYears());
+            values.put(COLUMN_QUESTIONS1_SUBJECT, dataQuestions1.getSubject());
+            values.put(COLUMN_QUESTIONS1_PART, dataQuestions1.getPart());
+            values.put(COLUMN_QUESTIONS1_CHAPTER, dataQuestions1.getChapter());
+            values.put(COLUMN_QUESTIONS1_QUE, dataQuestions1.getQue());
+            values.put(COLUMN_QUESTIONS1_CNO, dataQuestions1.getCno());
+            values.put(COLUMN_QUESTIONS1_RNO, dataQuestions1.getRno());
+            values.put(COLUMNT_QUESTIONS1_STATUS, "0");
+            db.insert(TABLE_NAME_QUESTIONS1, null, values);
+            db.setTransactionSuccessful();
+        }finally {
+            db.endTransaction();
+        }
         //  PrintAllParam();
         db.close();
 

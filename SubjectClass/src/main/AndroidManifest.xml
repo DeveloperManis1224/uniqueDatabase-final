@@ -38,11 +38,11 @@
         <activity
             android:name=".ActivitySignUp"
             android:label="SIGNUP"
-            android:noHistory="false"
+
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityOTP"
-            android:noHistory="true"
+
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
