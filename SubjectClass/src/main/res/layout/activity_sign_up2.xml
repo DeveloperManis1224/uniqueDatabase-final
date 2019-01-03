@@ -38,6 +38,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center_vertical|center_horizontal"
         android:text="SignUp"
+        android:visibility="gone"
         android:textColor="#000166"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -54,14 +55,14 @@
            android:id="@+id/edt_name"
            android:layout_width="300dp"
            android:layout_height="wrap_content"
-           android:layout_marginTop="100dp"
+           android:layout_marginTop="130dp"
            android:padding="10dp"
            android:textColorHint="#464646"
            android:ems="10"
            android:hint="Enter Name"
            android:inputType="textCapSentences"
            android:maxLength="20"
-           android:textColor="@android:color/white" />
+           android:textColor="@android:color/black" />
 
        <TextView
            android:id="@+id/edt_accounts"

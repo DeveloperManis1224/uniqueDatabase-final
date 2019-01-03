@@ -101,12 +101,11 @@ public class ActivitySignUp extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                //api.spark-invention.com
+                new FeedReaderDbHelper(ActivitySignUp.this).DEleteAll();
 //                Intent intent = new Intent(ActivitySignUp.this, ActivitySubject.class);
 //                intent.putExtra("mobile", mobileno.getText().toString());
 //                startActivity(intent);
-
                 progressDialog.setMessage("Please wait..");
                 progressDialog.setCancelable(false);
                 progressDialog.show();
@@ -155,12 +154,6 @@ public class ActivitySignUp extends Activity {
                         .url("http://medapp.roadtours.in/api/otp/otp.php")
                         .post(requestBody)
                         .build();
-
-
-
-//                java.lang.RuntimeException: Unable to start activity ComponentInfo{com.unique.app.adssan/com.unique.app.adssan.AboutAuthor}: android.view.InflateException: Binary XML file line #143: Could not inflate Behavior subclass database.unique.com.database.AvatarImageBehavior
-//                at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2744)
-//                at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2805)
                 okHttpClient.newCall(request).enqueue(new Callback()
                 {
                     @Override
@@ -179,9 +172,7 @@ public class ActivitySignUp extends Activity {
 
 if(progressDialog.isShowing())
 {
-
     progressDialog.dismiss();
-
 }
                             String bodyy = response.body().string();
                             int responsecode = response.code();
@@ -196,9 +187,7 @@ if(progressDialog.isShowing())
                                 Intent intent = new Intent(ActivitySignUp.this, ActivityOTP.class);
                                 intent.putExtra("mobile", mobileno.getText().toString());
                                 startActivity(intent);
-
                             }
-
                         }
                     }
                 });

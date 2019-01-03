@@ -56,7 +56,7 @@ public class ActivitySplash extends AppCompatActivity {
         if (!prefs.getBoolean("firstTime", false)) {
             if(isInternetAvailable())
             {
-                getAllData();
+                //getAllData();
             }
             else
             {
@@ -117,7 +117,7 @@ public class ActivitySplash extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }, 5000);
+        }, 3000);
 
 
 
@@ -193,168 +193,168 @@ public class ActivitySplash extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void getAllData() {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://medapp.roadtours.in/api/product/read.php";
-        final FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(this);
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(final String response) {
-                        Log.v("thisisresponse", response);
-                       // Parse(response);
-                        new fetchdata().execute(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.v("sadasdasd", error.toString());
-            }
-        });
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-    }
-
-    private class fetchdata extends AsyncTask<String,String, String>
-    {
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            Parse(strings[0]);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            Toast.makeText(ActivitySplash.this, "Question updated...", Toast.LENGTH_SHORT).show();
-            super.onPostExecute(s);
-        }
-    }
-
-    public void Parse(final String response) {
-       // progressDialog.show();
-        Thread td =new Thread(){
-            @Override
-            public void run() {
-                try {
-                final FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(ActivitySplash.this);
-                try {
-                    Log.v("trace_response", response.toString());
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray subject = jsonObject.getJSONArray("subject");
-                    JSONArray chapter = jsonObject.getJSONArray("chapter");
-                    JSONArray questions = jsonObject.getJSONArray("questions");
-                    JSONArray questions1 = jsonObject.getJSONArray("questions1");
-                    DataSubject dataSubject;
-                    DataChapter chapterdata;
-                    DataQuestions dataQuestions2;
-                    DataQuestions1 dataQuestions11;
-
-                    for (int i = 0; i < subject.length(); i++) {
-
-                        JSONObject jsonObject1 = subject.getJSONObject(i);
-                        Log.v("valuevalue", jsonObject1.getString("cid"));
-                        Log.v("valuevalue", jsonObject1.getString("category_name"));
-                        Log.v("valuevalue", jsonObject1.getString("year"));
-
-
-                        String cid = jsonObject1.getString("cid");
-                        String category_name = jsonObject1.getString("category_name");
-                        String year = jsonObject1.getString("year");
-                        dataSubject = new DataSubject(String.valueOf(i), cid, category_name, year);
-                        feedReaderDbHelper.addSubject(dataSubject);
-
-                    }
-
-                    for (int i = 0; i < chapter.length(); i++) {
-
-                        JSONObject jsonObject1 = chapter.getJSONObject(i);
-                        Log.v("valuevalue", jsonObject1.getString("id"));
-                        Log.v("valuevalue", jsonObject1.getString("chapter_name"));
-                        Log.v("valuevalue", jsonObject1.getString("subject"));
-                        Log.v("valuevalue", jsonObject1.getString("year"));
-
-                        String columnid = jsonObject1.getString("id");
-                        String chapter_name = jsonObject1.getString("chapter_name");
-                        String chapter_subject = jsonObject1.getString("subject");
-                        String year = jsonObject1.getString("year");
-
-                        chapterdata = new DataChapter(String.valueOf(i), columnid, chapter_name, chapter_subject, year);
-
-                        feedReaderDbHelper.addChapter(chapterdata);
-
-
-                    }
-                    for (int i = 0; i < questions.length(); i++) {
-
-                        JSONObject jsonObject1 = questions.getJSONObject(i);
-                        Log.v("valuevalue", jsonObject1.getString("tid"));
-                        Log.v("valuevalue", jsonObject1.getString("years"));
-                        Log.v("valuevalue", jsonObject1.getString("subject"));
-                        Log.v("valuevalue", jsonObject1.getString("part"));
-                        Log.v("valuevalue", jsonObject1.getString("chapter_name"));
-                        Log.v("valuevalue", jsonObject1.getString("que"));
-
-                        String tid = jsonObject1.getString("tid");
-                        String years = jsonObject1.getString("years");
-                        String subject1 = jsonObject1.getString("subject");
-                        String part = jsonObject1.getString("part");
-                        String chapter_name = jsonObject1.getString("chapter_name");
-                        String que = jsonObject1.getString("que");
-                        //  DataQuestions(String id, String tid, String years, String subject, String part, String chapter_name, String que) {
-
-                        dataQuestions2 = new DataQuestions(String.valueOf(i), tid, years, subject1, part, chapter_name, que);
-                        feedReaderDbHelper.addQuestions(dataQuestions2);
-                    }
-                    for (int i = 0; i < questions1.length(); i++) {
-
-                        JSONObject jsonObject1 = questions1.getJSONObject(i);
-                        Log.v("valuevalue", jsonObject1.getString("id"));
-                        Log.v("valuevalue", jsonObject1.getString("tid"));
-                        Log.v("valuevalue", jsonObject1.getString("years"));
-                        Log.v("valuevalue", jsonObject1.getString("subject"));
-                        Log.v("valuevalue", jsonObject1.getString("part"));
-                        Log.v("valuevalue", jsonObject1.getString("chapter"));
-                        Log.v("valuevalue", jsonObject1.getString("que"));
-                        Log.v("valuevalue", jsonObject1.getString("ques"));
-                        Log.v("valuevalue", jsonObject1.getString("cno"));
-                        Log.v("valuevalue", jsonObject1.getString("rno"));
-// DataQuestions1(String idvalue, String id, String tid, String years, String subject, String part, String chapter, String que, String ques, String cno, String rno) {
-
-                        String id = jsonObject1.getString("id");
-                        String tid = jsonObject1.getString("tid");
-                        String years = jsonObject1.getString("years");
-                        String subject1 = jsonObject1.getString("subject");
-                        String part = jsonObject1.getString("part");
-                        String chapter1 = jsonObject1.getString("chapter");
-                        String que = jsonObject1.getString("que");
-                        String ques = jsonObject1.getString("ques");
-                        String cno = jsonObject1.getString("cno");
-                        String rno = jsonObject1.getString("rno");
-                        dataQuestions11 = new DataQuestions1(String.valueOf(i), id, tid, years, subject1, part, chapter1, que, ques, cno, rno);
-
-                        feedReaderDbHelper.addQuestions1(dataQuestions11);
-                    }
-                    // Log.v("trace_database", feedReaderDbHelper.getSubject().toString());
-
-                    //Log.v("sadasdasdsa",String.valueOf(subject.length()));
-                } catch (Exception e) {
-                    Log.v("sadasdasdsd", e.toString());
-                }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                handler.sendEmptyMessage(0);
-            }
-        };
-        td.start();
-
-    }
+//    private void getAllData() {
+//        // Instantiate the RequestQueue.
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        String url = "http://medapp.roadtours.in/api/product/read.php?year";
+//        final FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(this);
+//        // Request a string response from the provided URL.
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(final String response) {
+//                        Log.v("thisisresponse", response);
+//                       // Parse(response);
+//                        new fetchdata().execute(response);
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.v("sadasdasd", error.toString());
+//            }
+//        });
+//        // Add the request to the RequestQueue.
+//        queue.add(stringRequest);
+//    }
+//
+//    private class fetchdata extends AsyncTask<String,String, String>
+//    {
+//        @Override
+//        protected void onPreExecute() {
+//
+//        }
+//
+//        @Override
+//        protected String doInBackground(String... strings) {
+//            Parse(strings[0]);
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            Toast.makeText(ActivitySplash.this, "Question updated...", Toast.LENGTH_SHORT).show();
+//            super.onPostExecute(s);
+//        }
+//    }
+//
+//    public void Parse(final String response) {
+//       // progressDialog.show();
+//        Thread td =new Thread(){
+//            @Override
+//            public void run() {
+//                try {
+//                final FeedReaderDbHelper feedReaderDbHelper = new FeedReaderDbHelper(ActivitySplash.this);
+//                try {
+//                    Log.v("trace_response", response.toString());
+//                    JSONObject jsonObject = new JSONObject(response);
+//                    JSONArray subject = jsonObject.getJSONArray("subject");
+//                    JSONArray chapter = jsonObject.getJSONArray("chapter");
+//                    JSONArray questions = jsonObject.getJSONArray("questions");
+//                    JSONArray questions1 = jsonObject.getJSONArray("questions1");
+//                    DataSubject dataSubject;
+//                    DataChapter chapterdata;
+//                    DataQuestions dataQuestions2;
+//                    DataQuestions1 dataQuestions11;
+//
+//                    for (int i = 0; i < subject.length(); i++) {
+//
+//                        JSONObject jsonObject1 = subject.getJSONObject(i);
+//                        Log.v("valuevalue", jsonObject1.getString("cid"));
+//                        Log.v("valuevalue", jsonObject1.getString("category_name"));
+//                        Log.v("valuevalue", jsonObject1.getString("year"));
+//
+//
+//                        String cid = jsonObject1.getString("cid");
+//                        String category_name = jsonObject1.getString("category_name");
+//                        String year = jsonObject1.getString("year");
+//                        dataSubject = new DataSubject(String.valueOf(i), cid, category_name, year);
+//                        feedReaderDbHelper.addSubject(dataSubject);
+//
+//                    }
+//
+//                    for (int i = 0; i < chapter.length(); i++) {
+//
+//                        JSONObject jsonObject1 = chapter.getJSONObject(i);
+//                        Log.v("valuevalue", jsonObject1.getString("id"));
+//                        Log.v("valuevalue", jsonObject1.getString("chapter_name"));
+//                        Log.v("valuevalue", jsonObject1.getString("subject"));
+//                        Log.v("valuevalue", jsonObject1.getString("year"));
+//
+//                        String columnid = jsonObject1.getString("id");
+//                        String chapter_name = jsonObject1.getString("chapter_name");
+//                        String chapter_subject = jsonObject1.getString("subject");
+//                        String year = jsonObject1.getString("year");
+//
+//                        chapterdata = new DataChapter(String.valueOf(i), columnid, chapter_name, chapter_subject, year);
+//
+//                        feedReaderDbHelper.addChapter(chapterdata);
+//
+//
+//                    }
+//                    for (int i = 0; i < questions.length(); i++) {
+//
+//                        JSONObject jsonObject1 = questions.getJSONObject(i);
+//                        Log.v("valuevalue", jsonObject1.getString("tid"));
+//                        Log.v("valuevalue", jsonObject1.getString("years"));
+//                        Log.v("valuevalue", jsonObject1.getString("subject"));
+//                        Log.v("valuevalue", jsonObject1.getString("part"));
+//                        Log.v("valuevalue", jsonObject1.getString("chapter_name"));
+//                        Log.v("valuevalue", jsonObject1.getString("que"));
+//
+//                        String tid = jsonObject1.getString("tid");
+//                        String years = jsonObject1.getString("years");
+//                        String subject1 = jsonObject1.getString("subject");
+//                        String part = jsonObject1.getString("part");
+//                        String chapter_name = jsonObject1.getString("chapter_name");
+//                        String que = jsonObject1.getString("que");
+//                        //  DataQuestions(String id, String tid, String years, String subject, String part, String chapter_name, String que) {
+//
+//                        dataQuestions2 = new DataQuestions(String.valueOf(i), tid, years, subject1, part, chapter_name, que);
+//                        feedReaderDbHelper.addQuestions(dataQuestions2);
+//                    }
+//                    for (int i = 0; i < questions1.length(); i++) {
+//
+//                        JSONObject jsonObject1 = questions1.getJSONObject(i);
+//                        Log.v("valuevalue", jsonObject1.getString("id"));
+//                        Log.v("valuevalue", jsonObject1.getString("tid"));
+//                        Log.v("valuevalue", jsonObject1.getString("years"));
+//                        Log.v("valuevalue", jsonObject1.getString("subject"));
+//                        Log.v("valuevalue", jsonObject1.getString("part"));
+//                        Log.v("valuevalue", jsonObject1.getString("chapter"));
+//                        Log.v("valuevalue", jsonObject1.getString("que"));
+//                        Log.v("valuevalue", jsonObject1.getString("ques"));
+//                        Log.v("valuevalue", jsonObject1.getString("cno"));
+//                        Log.v("valuevalue", jsonObject1.getString("rno"));
+//// DataQuestions1(String idvalue, String id, String tid, String years, String subject, String part, String chapter, String que, String ques, String cno, String rno) {
+//
+//                        String id = jsonObject1.getString("id");
+//                        String tid = jsonObject1.getString("tid");
+//                        String years = jsonObject1.getString("years");
+//                        String subject1 = jsonObject1.getString("subject");
+//                        String part = jsonObject1.getString("part");
+//                        String chapter1 = jsonObject1.getString("chapter");
+//                        String que = jsonObject1.getString("que");
+//                        String ques = jsonObject1.getString("ques");
+//                        String cno = jsonObject1.getString("cno");
+//                        String rno = jsonObject1.getString("rno");
+//                        dataQuestions11 = new DataQuestions1(String.valueOf(i), id, tid, years, subject1, part, chapter1, que, ques, cno, rno);
+//
+//                        feedReaderDbHelper.addQuestions1(dataQuestions11);
+//                    }
+//                    // Log.v("trace_database", feedReaderDbHelper.getSubject().toString());
+//
+//                    //Log.v("sadasdasdsa",String.valueOf(subject.length()));
+//                } catch (Exception e) {
+//                    Log.v("sadasdasdsd", e.toString());
+//                }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                handler.sendEmptyMessage(0);
+//            }
+//        };
+//        td.start();
+//
+//    }
 }
