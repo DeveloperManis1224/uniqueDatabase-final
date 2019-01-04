@@ -56,17 +56,17 @@ public class ActivityOTP extends AppCompatActivity {
         year11 = settings.getString("year", "");
 
 
-        //getAllData(year11);
-        SharedPreferences wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
-        if (isFirstRun)
-        {
-           getAllData(year11);
-            // Code to run once
-            SharedPreferences.Editor editor = wmbPreference.edit();
-            editor.putBoolean("FIRSTRUN", false);
-            editor.commit();
-        }
+//        //getAllData(year11);
+//        SharedPreferences wmbPreference = PreferenceManager.getDefaultSharedPreferences(this);
+//        boolean isFirstRun = wmbPreference.getBoolean("FIRSTRUN", true);
+//        if (isFirstRun)
+//        {
+//           getAllData(year11);
+//            // Code to run once
+//            SharedPreferences.Editor editor = wmbPreference.edit();
+//            editor.putBoolean("FIRSTRUN", false);
+//            editor.commit();
+//        }
 
 //
 //        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -156,14 +156,11 @@ public class ActivityOTP extends AppCompatActivity {
                                         public void run() {
                                             progressDialog.setMessage("Fetching...");
                                            // Toast.makeText(getApplicationContext(),"OTP Success",Toast.LENGTH_LONG).show();
-                                           // getAllData(year11);
+                                            getAllData(year11);
 //                                            if(progressDialog.isShowing())
 //                                            {
 //                                                progressDialog.dismiss();
-                                                SharedPreferences pref = getApplicationContext().getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                                                SharedPreferences.Editor editor = pref.edit();
-                                                editor.putString("otp_status", "1");
-                                                editor.apply();
+
                                             //}
                                         }
                                     });
@@ -253,16 +250,26 @@ public class ActivityOTP extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
+
     public void onSkipClick(View v) {
 
-
             progressDialog.show();
-            new fetchdata().cancel(true);
-            new FeedReaderDbHelper(ActivityOTP.this).DEleteAll();
-        SharedPreferences pref = getApplicationContext().getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("otp_status", "1");
-        editor.apply();
+//        SharedPreferences pref = getApplicationContext().getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = pref.edit();
+//        editor.putString("otp_status", "1");
+//        editor.apply();
+//        if()
         getAllData(year11);
         //v.setVisibility(View.GONE);
 
@@ -289,7 +296,6 @@ public class ActivityOTP extends AppCompatActivity {
 //                }
 //            }
 //        }, 3000);
-        getAllData(year11);
 
     }
 
@@ -338,23 +344,20 @@ public class ActivityOTP extends AppCompatActivity {
             {
                 progressDialog.dismiss();
             }
-
-
-
             SharedPreferences settings = getSharedPreferences("MyPref", MODE_PRIVATE);
             String otp_status = settings.getString("otp_status", "");
-            if(otp_status.equalsIgnoreCase("1"))
-            {
+//            if(otp_status.equalsIgnoreCase("1"))
+//            {
                 SharedPreferences pref = getApplicationContext().getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("status", "1");
                 editor.apply();
                 Intent intent = new Intent(ActivityOTP.this, ActivitySubject.class);
                 startActivity(intent);
-            }
-            else {
-
-            }
+//            }
+//            else {
+//
+//            }
             //Toast.makeText(ActivityOTP.this, "Question updated...", Toast.LENGTH_SHORT).show();
 
             // super.onPostExecute(s);
